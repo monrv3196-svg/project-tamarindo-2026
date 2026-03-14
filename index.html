@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan de entrenamiento — Maratón 5 sep 2026</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #ffffff;
+    --bg2: #f5f4f0;
+    --bg3: #eeecea;
+    --text: #1a1a18;
+    --text2: #5a5a56;
+    --text3: #9a9890;
+    --border: rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.18);
+    --radius: 12px;
+    --purple: #4B3FA0;
+    --purple-light: #ede9ff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1c1a;
+      --bg2: #252523;
+      --bg3: #2e2e2b;
+      --text: #e8e6de;
+      --text2: #a8a69e;
+      --text3: #6a6860;
+      --border: rgba(255,255,255,0.08);
+      --border2: rgba(255,255,255,0.14);
+      --purple: #7b6fd4;
+      --purple-light: #2a2460;
+    }
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+  .header { margin-bottom: 2rem; }
+  .header h1 { font-size: 22px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .header p { font-size: 14px; color: var(--text2); }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.25rem; }
+  .tab {
+    padding: 7px 16px; border-radius: 20px; font-size: 13px; cursor: pointer;
+    border: 1px solid var(--border2); background: var(--bg2); color: var(--text2);
+    transition: all .15s; user-select: none;
+  }
+  .tab:hover { border-color: var(--purple); color: var(--purple); }
+  .tab.active { background: var(--purple); color: var(--purple-light); border-color: var(--purple); }
+
+  /* Legend */
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .leg { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text2); }
+  .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  /* Phase desc */
+  .phase-desc {
+    font-size: 13px; color: var(--text2); margin-bottom: 14px;
+    padding: 10px 14px; background: var(--bg2);
+    border-radius: 8px; border-left: 3px solid var(--border2);
+  }
+  .phase-range { font-weight: 500; color: var(--text); }
+
+  /* Week */
+  .week {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: var(--radius); margin-bottom: 10px; overflow: hidden;
+  }
+  .week-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 11px 16px; cursor: pointer; user-select: none;
+  }
+  .week-header:hover { background: var(--bg3); }
+  .week-num { font-size: 13px; font-weight: 600; min-width: 80px; }
+  .week-label { font-size: 13px; color: var(--text2); flex: 1; }
+  .week-km { font-size: 12px; color: var(--text3); }
+  .week-mini { display: flex; gap: 3px; }
+  .mini-day { width: 14px; height: 14px; border-radius: 3px; }
+  .chevron { font-size: 11px; color: var(--text3); transition: transform .2s; margin-left: 4px; }
+  .chevron.open { transform: rotate(180deg); }
+
+  .week-body { display: none; padding: 0 16px 16px; }
+  .week-body.open { display: block; }
+  .struct-note {
+    font-size: 11px; color: var(--text3); margin-top: 8px; margin-bottom: 2px;
+    font-style: italic;
+  }
+
+  /* Days grid */
+  .days {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px; margin-top: 10px;
+  }
+  .day-card { border-radius: 8px; padding: 11px 13px; border: 1px solid var(--border); }
+  .day-card.run  { background: #E6F1FB; border-color: #B5D4F4; }
+  .day-card.gym  { background: #E1F5EE; border-color: #9FE1CB; }
+  .day-card.long { background: #FAEEDA; border-color: #FAC775; }
+  .day-card.mov  { background: #FBEAF0; border-color: #F4C0D1; }
+  .day-card.rest { background: var(--bg3); border-color: var(--border); }
+  @media (prefers-color-scheme: dark) {
+    .day-card.run  { background: #0C447C28; border-color: #185F8A; }
+    .day-card.gym  { background: #08504128; border-color: #0F6E56; }
+    .day-card.long { background: #63380628; border-color: #854F0B; }
+    .day-card.mov  { background: #72243E28; border-color: #993556; }
+  }
+  .day-name {
+    font-size: 10px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .07em; color: var(--text2); margin-bottom: 3px;
+  }
+  .day-title { font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+  .day-items { font-size: 12px; color: var(--text2); line-height: 1.8; }
+  .day-items li { list-style: none; padding-left: 12px; position: relative; }
+  .day-items li::before { content: "–"; position: absolute; left: 0; color: var(--text3); }
+
+  /* Footer */
+  .footer { margin-top: 3rem; text-align: center; font-size: 12px; color: var(--text3); }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <h1>Plan de entrenamiento — Maratón 5 sep 2026</h1>
+    <p>25 semanas · inicia lunes 16 mar · Lun/Mar: carrera · Mié/Jue: gym + carrera corta · Vie: movilidad · Sáb: long run · Dom: descanso</p>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="showPhase(0)">Fase 1 — Base</div>
+    <div class="tab" onclick="showPhase(1)">Fase 2 — Construcción</div>
+    <div class="tab" onclick="showPhase(2)">Fase 3 — Pico</div>
+    <div class="tab" onclick="showPhase(3)">Fase 4 — Taper</div>
+    <div class="tab" onclick="showPhase(4)">Gym y Movilidad</div>
+  </div>
+
+  <div class="legend">
+    <div class="leg"><div class="dot" style="background:#3B8BD4"></div>Carrera</div>
+    <div class="leg"><div class="dot" style="background:#1D9E75"></div>Gym + carrera corta</div>
+    <div class="leg"><div class="dot" style="background:#BA7517"></div>Long run</div>
+    <div class="leg"><div class="dot" style="background:#D4537E"></div>Descanso activo / movilidad</div>
+    <div class="leg"><div class="dot" style="background:#888780"></div>Descanso total</div>
+  </div>
+
+  <div id="phase-content"></div>
+
+  <div class="footer">Generado con Claude · Maratón 5 de septiembre 2026</div>
+</div>
+
+<script>
+const STRUCT = "Lun: carrera · Mar: carrera · Mié: gym + carrera corta · Jue: gym + carrera corta · Vie: movilidad activa · Sáb: long run · Dom: descanso";
+
+const PHASES = [
+  {
+    name: "Fase 1",
+    range: "16 mar – 26 abr · semanas 1–6",
+    desc: "Construir base aeróbica y adaptar articulaciones. Volúmenes bajos, ritmo conversacional. Establecer rutina de gimnasio y movilidad desde el primer día.",
+    weeks: [
+      {
+        num: "Sem 1", label: "16 mar — arranque", km: "~20 km",
+        days: [
+          { name: "Lunes 16 mar", type: "run", title: "Primera carrera del plan", items: ["35 min zona 2", "Ritmo muy cómodo, conversacional", "~5 km"] },
+          { name: "Martes 17 mar", type: "run", title: "Carrera fácil", items: ["35 min zona 2", "~5 km"] },
+          { name: "Miércoles 18 mar", type: "gym", title: "Gym + carrera corta", items: ["Carrera 20 min zona 2 antes del gym", "Sentadilla goblet KB: 3×12", "Peso muerto rumano KB: 3×10", "Hip thrust con mancuerna: 3×12", "Plancha frontal: 3×40s", "Ligas: abducción lateral parado: 3×15 c/lado"] },
+          { name: "Jueves 19 mar", type: "gym", title: "Gym + carrera corta", items: ["Carrera 20 min zona 2 antes del gym", "Estocadas con mancuernas: 3×10 c/lado", "Step-up con mancuernas: 3×10 c/lado", "Sentadilla sumo KB: 3×12", "Dead bug: 3×10 c/lado", "Ligas: monster walk lateral: 3×15 pasos"] },
+          { name: "Viernes 20 mar", type: "mov", title: "Descanso activo — movilidad", items: ["Foam roller pierna completa: 15 min", "Hip 90/90: 2×60s c/lado", "Paloma (pigeon pose): 2×45s c/lado", "World's greatest stretch: 5 reps c/lado", "Estiramiento de pantorrilla: 45s c/lado"] },
+          { name: "Sábado 21 mar", type: "long", title: "Primer long run", items: ["50 min zona 1–2", "~6–7 km, ritmo muy suave", "Hidratación cada 20 min"] },
+          { name: "Domingo 22 mar", type: "rest", title: "Descanso total", items: ["Recuperación completa", "Opcional: caminata 20 min"] },
+        ]
+      },
+      {
+        num: "Sem 2–3", label: "Progresión suave", km: "~24–28 km",
+        days: [
+          { name: "Lunes", type: "run", title: "Carrera fácil", items: ["40 min zona 2", "~6 km"] },
+          { name: "Martes", type: "run", title: "Carrera fácil", items: ["40–45 min zona 2", "~6–7 km"] },
+          { name: "Miércoles", type: "gym", title: "Gym + carrera corta", items: ["Carrera 20–25 min zona 2", "Mismos ejercicios + incrementar 1–2 kg", "Añadir: Bulgarian split squat KB: 3×8 c/lado"] },
+          { name: "Jueves", type: "gym", title: "Gym + carrera corta", items: ["Carrera 20–25 min zona 2", "Hip thrust pesado + cargada lateral con liga", "Plancha lateral: 3×30s c/lado"] },
+          { name: "Viernes", type: "mov", title: "Descanso activo — movilidad", items: ["Foam roller completo 15 min", "Estiramiento de iliopsoas en estocada baja: 2×45s c/lado", "Rotaciones de cadera dinámicas: 10 reps c/lado", "Tobillo: círculos y dorsiflexión: 2×10 c/lado", "Glúteo tumbado figura 4: 60s c/lado"] },
+          { name: "Sábado", type: "long", title: "Long run", items: ["65–70 min zona 1–2", "~9–10 km"] },
+          { name: "Domingo", type: "rest", title: "Descanso total", items: ["Recuperación completa"] },
+        ]
+      },
+      {
+        num: "Sem 4", label: "Descarga programada", km: "~15 km",
+        days: [
+          { name: "Lunes", type: "run", title: "Carrera muy suave", items: ["30 min zona 1–2", "Sin presión de ritmo"] },
+          { name: "Martes", type: "run", title: "Carrera muy suave", items: ["30 min zona 1–2"] },
+          { name: "Miércoles", type: "gym", title: "Gym ligero + carrera corta", items: ["Carrera 15 min zona 1", "Ejercicios al 65% de carga habitual", "Solo activación con ligas y core"] },
+          { name: "Jueves", type: "gym", title: "Gym ligero + carrera corta", items: ["Carrera 15 min zona 1", "Solo core: plancha, dead bug, bird-dog"] },
+          { name: "Viernes", type: "mov", title: "Descanso activo — movilidad profunda", items: ["Sesión larga de estiramientos 25 min", "Foam roller completo sin apuro", "Prioridad total en recuperación"] },
+          { name: "Sábado", type: "long", title: "Long run reducido", items: ["45 min zona 1–2", "~6 km, muy suave"] },
+          { name: "Domingo", type: "rest", title: "Descanso total", items: ["Recuperación completa"] },
+        ]
+      },
+      {
+        num: "Sem 5–6", label: "Consolidación base", km: "~30–35 km",
+        days: [
+          { name: "Lunes", type: "run", title: "Carrera fácil", items: ["45–50 min zona 2", "~7–8 km"] },
+          { name: "Martes", type: "run", title: "Carrera moderada", items: ["50 min zona 2", "~8 km"] },
+          { name: "Miércoles", type: "gym", title: "Gym + carrera corta", items: ["Carrera 25–30 min zona 2", "Todas las series de pierna + core", "Bulgarian split squat KB progresivo"] },
+          { name: "Jueves", type: "gym", title: "Gym + carrera corta", items: ["Carrera 25–30 min zona 2", "Énfasis en glúteo e isquiotibiales", "KB swing: 3×12 (introducción)"] },
+          { name: "Viernes", type: "mov", title: "Descanso activo — movilidad", items: ["Sesión completa movilidad 20 min", "Prioridad: cadera, tobillo, glúteo", "Foam roller IT band y cuádriceps"] },
+          { name: "Sábado", type: "long", title: "Long run", items: ["85–95 min zona 1–2", "~12–14 km"] },
+          { name: "Domingo", type: "rest", title: "Descanso total", items: ["Recuperación completa"] },
+        ]
+      }
+    ]
+  },
+  {
+    name: "Fase 2",
+    range: "27 abr – 21 jun · semanas 7–14",
+    desc: "Subir volumen progresivamente. Introducir tempo runs e intervalos los martes. El gimnasio escala en carga con énfasis en fuerza funcional unilateral.",
+    weeks: [
+      {
+        num: "Sem 7–8", label: "Introducción de calidad", km: "~38–44 km",
+        days: [
+          { name: "Lunes", type: "run", title: "Rodaje suave", items: ["55 min zona 2", "~9–10 km"] },
+          { name: "Martes", type: "run", title: "Carrera con tempo corto", items: ["55 min con 15–20 min zona 3–4 al centro", "~10 km"] },
+          { name: "Miércoles", type: "gym", title: "Gym + carrera corta", items: ["Carrera 25 min zona 2", "Sentadilla goblet KB pesado: 4×10", "Peso muerto rumano mancuernas: 4×8", "Hip thrust pesado: 4×10", "Plancha lateral + elevación cadera: 3×12 c/lado", "Ligas: clamshell + fire hydrant: 3×15 c/lado"] },
+          { name: "Jueves", type: "gym", title: "Gym + carrera corta", items: ["Carrera 25 min zona 2", "Bulgarian split squat KB: 4×8 c/lado", "Step-up elevado mancuernas: 3×10 c/lado", "Dead bug con resistencia: 3×12", "Ligas: abducción parado + monster walk: 3×15"] },
+          { name: "Viernes", type: "mov", title: "Descanso activo — movilidad", items: ["Foam roller completo 15 min", "Hip 90/90 + rotación interna cadera", "Estiramiento dinámico isquio y cuádriceps", "Glúteo figura 4 + rotación espinal"] },
+          { name: "Sábado", type: "long", title: "Long run", items: ["100–110 min zona 1–2", "~16–18 km"] },
+          { name: "Domingo", type: "rest", title: "Descanso total", items: ["Recuperación completa"] },
+        ]
+      },
+      {
+        num: "Sem 9–10", label: "Subida de volumen", km: "~46–52 km",
+        days: [
+          { name: "Lunes", type: "run", title: "Rodaje suave", items: ["60 min zona 2", "~10–11 km"] },
+          { name: "Martes", type: "run", title: "Intervalos suaves", items: ["60 min con 4×5 min zona 4, rec 2 min zona 2", "~11–12 km"] },
+          { name: "Miércoles", type: "gym", title: "Gym + carrera corta", items: ["Carrera 30 min zona 2", "Aumentar cargas 5–10%", "Sentadilla sumo KB con pausa en fondo: 3×10", "Pallof press con liga: 3×12 c/lado (introducción)"] },
+          { name: "Jueves", type: "gym", title: "Gym + carrera corta", items: ["Carrera 30 min zona 2", "Activación glúteo y core anti-rotacional", "Single-leg deadlift KB: 3×8 c/lado (introducción)"] },
+          { name: "Viernes", type: "mov", title: "Descanso activo — movilidad", items: ["Sesión movilidad 20 min", "Tobillo, cadera, columna torácica", "Masaje con pelota de lacrosse en glúteo y planta del pie"] },
+          { name: "Sábado", type: "long", title: "Long run", items: ["120–130 min zona 1–2", "~19–22 km"] },
+          { name: "Domingo", type: "rest", title: "Descanso total", items: ["Recuperación completa"] },
+        ]
+      },
+      {
+        num: "Sem 11", label: "Descarga programada", km: "~26 km",
+        days: [
+          { name: "Lunes", type: "run", title: "Carrera suave", items: ["40 min zona 1–2"] },
+          { name: "Martes", type: "run", title: "Carrera suave", items: ["35 min zona 1–2"] },
+          { name: "Miércoles", type: "gym", title: "Gym ligero + carrera corta", items: ["Carrera 20 min zona 1–2", "Reducir volumen 30%, cargas al 65%", "Solo activación con ligas"] },
+          { name: "Jueves", type: "gym", title: "Gym ligero + carrera corta", items: ["Carrera 20 min zona 1–2", "Core únicamente: plancha, dead bug, bird-dog"] },
+          { name: "Viernes", type: "mov", title: "Descanso activo — movilidad profunda", items: ["Sesión larga 25 min", "Estiramientos pasivos + foam roller completo"] },
+          { name: "Sábado", type: "long", title: "Long run reducido", items: ["75 min zona 1–2", "~12 km, muy suave"] },
+          { name: "Domingo", type: "rest", title: "Descanso total", items: ["Recuperación completa"] },
+        ]
+      },
+      {
+        num: "Sem 12–14", label: "Consolidación construcción", km: "~54–60 km",
+        days: [
+          { name: "Lunes", type: "run", title: "Rodaje suave", items: ["65–70 min zona 2", "~11–12 km"] },
+          { name: "Martes", type: "run", title: "Tempo o intervalos", items: ["60 min con 25–30 min trabajo de calidad zona 3–4"] },
+          { name: "Miércoles", type: "gym", title: "Gym + carrera corta", items: ["Carrera 30 min zona 2", "Circuito unilateral: split squat, step-up, hip thrust", "Core: Pallof press liga, dead bug, bird-dog"] },
+          { name: "Jueves", type: "gym", title: "Gym + carrera corta", items: ["Carrera 30 min zona 2", "KB swing potencia: 4×12", "Single-leg hip thrust: 3×10 c/lado"] },
+          { name: "Viernes", type: "mov", title: "Descanso activo — movilidad", items: ["Sesión completa movilidad y foam roller", "Cadera + isquio + tobillo + columna"] },
+          { name: "Sábado", type: "long", title: "Long run", items: ["130–150 min zona 1–2", "~22–26 km"] },
+          { name: "Domingo", type: "rest", title: "Descanso total", items: ["Recuperación completa"] },
+        ]
+      }
+    ]
+  },
+  {
+    name: "Fase 3",
+    range: "22 jun – 2 ago · semanas 15–20",
+    desc: "Máximo volumen. Long runs de 28–35 km. Trabajo en ritmo de maratón los martes. El gimnasio pasa a modo mantenimiento para proteger las piernas.",
+    weeks: [
+      {
+        num: "Sem 15–16", label: "Volumen alto", km: "~62–68 km",
+        days: [
+          { name: "Lunes", type: "run", title: "Rodaje moderado", items: ["70–75 min zona 2", "~13–14 km"] },
+          { name: "Martes", type: "run", title: "Carrera en ritmo maratón", items: ["65–70 min con 30–35 min en ritmo objetivo (zona 3–4)"] },
+          { name: "Miércoles", type: "gym", title: "Gym mantenimiento + carrera corta", items: ["Carrera 20–25 min zona 2", "Sentadilla goblet + hip thrust: mantener fuerza", "Core: Pallof press, planchas dinámicas", "Ligas: activación glúteo completa"] },
+          { name: "Jueves", type: "gym", title: "Gym mantenimiento + carrera corta", items: ["Carrera 20–25 min zona 2", "Solo 2–3 series por ejercicio", "KB swing + step-up: potencia funcional"] },
+          { name: "Viernes", type: "mov", title: "Descanso activo — movilidad prioritaria", items: ["Prioridad máxima en esta fase", "Foam roller 20 min + estiramientos activos", "Masaje o auto-masaje con pelota de lacrosse"] },
+          { name: "Sábado", type: "long", title: "Long run", items: ["28–30 km en zona 1–2", "Practicar estrategia de alimentación e hidratación"] },
+          { name: "Domingo", type: "rest", title: "Descanso total", items: ["Recuperación crítica"] },
+        ]
+      },
+      {
+        num: "Sem 17", label: "Descarga programada", km: "~32 km",
+        days: [
+          { name: "Lunes", type: "run", title: "Carrera suave", items: ["45 min zona 1–2"] },
+          { name: "Martes", type: "run", title: "Carrera suave", items: ["40 min zona 1–2"] },
+          { name: "Miércoles", type: "gym", title: "Gym suave + carrera corta", items: ["Carrera 15 min zona 1", "Solo movilidad, ligas y core. Sin carga pesada"] },
+          { name: "Jueves", type: "gym", title: "Gym suave + carrera corta", items: ["Carrera 15 min zona 1", "Core únicamente"] },
+          { name: "Viernes", type: "mov", title: "Descanso activo — movilidad profunda", items: ["Sesión larga 25–30 min", "Recuperación total del cuerpo"] },
+          { name: "Sábado", type: "long", title: "Long run reducido", items: ["18–20 km zona 1–2, muy suave"] },
+          { name: "Domingo", type: "rest", title: "Descanso total", items: ["Recuperación completa"] },
+        ]
+      },
+      {
+        num: "Sem 18–20", label: "Pico máximo", km: "~65–72 km",
+        days: [
+          { name: "Lunes", type: "run", title: "Rodaje suave–moderado", items: ["75 min zona 2", "~14–15 km"] },
+          { name: "Martes", type: "run", title: "Tempo en ritmo de carrera", items: ["70 min con 35–40 min en ritmo maratón objetivo"] },
+          { name: "Miércoles", type: "gym", title: "Gym mantenimiento + carrera corta", items: ["Carrera 20 min zona 2", "Mantenimiento de fuerza: 2 series por grupo muscular", "Énfasis en estabilidad y core anti-rotacional"] },
+          { name: "Jueves", type: "gym", title: "Gym mantenimiento + carrera corta", items: ["Carrera 20 min zona 2", "2 series por ejercicio, carga moderada"] },
+          { name: "Viernes", type: "mov", title: "Descanso activo — movilidad crítica", items: ["Sesión obligatoria 25–30 min", "Todo el cuerpo, especialmente pierna y cadera"] },
+          { name: "Sábado", type: "long", title: "Long run pico", items: ["32–35 km (sem 18–19)", "28 km semana 20 (pre-taper)", "Estrategia de carrera completa, practicar geles"] },
+          { name: "Domingo", type: "rest", title: "Descanso total", items: ["Recuperación crítica"] },
+        ]
+      }
+    ]
+  },
+  {
+    name: "Fase 4",
+    range: "3 ago – 5 sep · semanas 21–25",
+    desc: "Reducción progresiva de volumen manteniendo intensidad. Llegar fresco, cargado y confiado a la largada.",
+    weeks: [
+      {
+        num: "Sem 21–22", label: "Taper inicial", km: "~46–50 km",
+        days: [
+          { name: "Lunes", type: "run", title: "Rodaje moderado", items: ["60 min zona 2", "~11 km"] },
+          { name: "Martes", type: "run", title: "Carrera con calidad", items: ["55 min con 20 min en ritmo de carrera"] },
+          { name: "Miércoles", type: "gym", title: "Gym suave + carrera corta", items: ["Carrera 20 min zona 2", "Solo mantenimiento liviano", "Ligas: activación glúteo y tobillo"] },
+          { name: "Jueves", type: "gym", title: "Gym suave + carrera corta", items: ["Carrera 20 min zona 2", "Fuerza ligera: 2 series, 60–65% carga"] },
+          { name: "Viernes", type: "mov", title: "Descanso activo — movilidad", items: ["Sesión completa de movilidad"] },
+          { name: "Sábado", type: "long", title: "Long run reducido", items: ["24–25 km zona 1–2"] },
+          { name: "Domingo", type: "rest", title: "Descanso total", items: ["Recuperación completa"] },
+        ]
+      },
+      {
+        num: "Sem 23", label: "Taper medio", km: "~33 km",
+        days: [
+          { name: "Lunes", type: "run", title: "Rodaje suave", items: ["50 min zona 1–2", "~9 km"] },
+          { name: "Martes", type: "run", title: "Carrera moderada", items: ["45 min con 10 min en ritmo maratón"] },
+          { name: "Miércoles", type: "gym", title: "Activación + carrera corta", items: ["Carrera 15 min zona 1–2", "Solo core y ligas, sin pierna pesada"] },
+          { name: "Jueves", type: "gym", title: "Activación + carrera corta", items: ["Carrera 15 min zona 1–2", "Ligas, movilidad y core únicamente"] },
+          { name: "Viernes", type: "mov", title: "Descanso activo — movilidad", items: ["Sesión completa de recuperación"] },
+          { name: "Sábado", type: "long", title: "Long run taper", items: ["18–20 km zona 1–2"] },
+          { name: "Domingo", type: "rest", title: "Descanso total", items: ["Recuperación completa"] },
+        ]
+      },
+      {
+        num: "Sem 24", label: "Semana pre-carrera", km: "~20 km",
+        days: [
+          { name: "Lunes", type: "run", title: "Rodaje muy suave", items: ["35 min zona 1", "~6 km"] },
+          { name: "Martes", type: "run", title: "Rodaje con strides", items: ["30 min zona 1–2 con 4–6 strides de 20s", "~5 km"] },
+          { name: "Miércoles", type: "gym", title: "Activación mínima + carrera corta", items: ["Carrera 10 min zona 1", "Solo ligas y movilidad. Sin carga alguna"] },
+          { name: "Jueves", type: "run", title: "Rodaje de activación", items: ["20 min zona 1 muy suave + 3 strides de 15s"] },
+          { name: "Viernes", type: "mov", title: "Descanso activo suave", items: ["Estiramientos pasivos 15 min", "Hidratación consciente todo el día", "Preparar kit de carrera. Dormir temprano"] },
+          { name: "Sábado 5 sep", type: "long", title: "MARATÓN", items: ["42.195 km", "Salida cómoda, ritmo negativo en segunda mitad", "Geles cada 40–45 min desde km 15", "Confiar en las 25 semanas de trabajo"] },
+          { name: "Domingo", type: "rest", title: "Descanso y celebración", items: ["Recuperación completa", "Te lo ganaste"] },
+        ]
+      }
+    ]
+  },
+  {
+    name: "Gym y Movilidad",
+    range: "Referencia permanente del plan",
+    desc: "Banco completo de ejercicios de fuerza con KB y mancuernas, activación con ligas pequeñas, y rutinas de movilidad para los viernes y días de recuperación.",
+    weeks: [
+      {
+        num: "Pierna — empuje", label: "Cuádriceps y glúteos",
+        days: [
+          { name: "Bilateral", type: "gym", title: "Empuje bilateral", items: ["Sentadilla goblet KB: 3–4×10–12", "Sentadilla sumo KB: 3×12", "Sentadilla sumo KB con pausa en fondo: 3×10 (sem 9+)"] },
+          { name: "Unilateral", type: "gym", title: "Empuje unilateral", items: ["Bulgarian split squat KB: 3–4×8–10 c/lado", "Step-up con mancuernas: 3×10 c/lado", "Reverse lunge con mancuernas: 3×10 c/lado", "Lateral lunge con KB: 3×10 c/lado (sem 8+)"] },
+        ]
+      },
+      {
+        num: "Pierna — tracción", label: "Glúteos e isquiotibiales",
+        days: [
+          { name: "Bilateral", type: "gym", title: "Tracción bilateral", items: ["Peso muerto rumano con mancuernas: 3–4×8–10", "Hip thrust con mancuerna: 3–4×10–12", "KB swing: 3–4×12 (introducción sem 6)"] },
+          { name: "Unilateral", type: "gym", title: "Tracción unilateral", items: ["Single-leg deadlift KB: 3×8 c/lado (sem 10+)", "Single-leg hip thrust: 3×10 c/lado (sem 12+)"] },
+        ]
+      },
+      {
+        num: "Core", label: "Anti-rotación y estabilidad",
+        days: [
+          { name: "Frontal", type: "gym", title: "Plancha y variaciones", items: ["Plancha frontal: 3×40–60s", "Plancha con toque de hombros: 3×12 c/lado", "Plancha con alcance: 3×10 c/lado"] },
+          { name: "Anti-rotacional", type: "gym", title: "Core funcional", items: ["Dead bug: 3×10–12 c/lado", "Bird-dog: 3×10 c/lado", "Pallof press con liga pequeña: 3×12 c/lado (sem 8+)"] },
+          { name: "Lateral", type: "gym", title: "Core lateral", items: ["Plancha lateral: 3×30–40s c/lado", "Plancha lateral con elevación cadera: 3×10 c/lado"] },
+        ]
+      },
+      {
+        num: "Ligas pequeñas", label: "Activación pre-carrera y pre-gym",
+        days: [
+          { name: "Glúteo medio", type: "gym", title: "Activación lateral", items: ["Clamshell: 2–3×15–20 c/lado", "Fire hydrant: 2–3×12–15 c/lado", "Abducción lateral parado: 2–3×15 c/lado", "Monster walk lateral: 3×15 pasos c/lado"] },
+          { name: "Glúteo mayor", type: "gym", title: "Activación posterior", items: ["Donkey kick con liga: 3×12–15 c/lado", "Hip thrust con liga en rodillas: 3×15", "Pull-through con liga: 3×12"] },
+          { name: "Rodilla y tobillo", type: "gym", title: "Estabilidad distal", items: ["Terminal knee extension (TKE): 3×15 c/lado", "Banded squat con liga en rodillas: 3×12", "Dorsiflexión de tobillo con liga: 3×15 c/lado"] },
+        ]
+      },
+      {
+        num: "Movilidad", label: "Viernes y días de recuperación",
+        days: [
+          { name: "Cadera (prioridad 1)", type: "mov", title: "Movilidad de cadera", items: ["Hip 90/90: 60–90s c/lado", "Paloma (pigeon pose): 45–60s c/lado", "Hip flexor en estocada baja: 45–60s c/lado", "World's greatest stretch: 5 reps c/lado"] },
+          { name: "Pierna y tobillo", type: "mov", title: "Movilidad inferior", items: ["Foam roller cuádriceps: 60s c/lado", "Foam roller IT band: 60s c/lado", "Foam roller pantorrilla: 60s c/lado", "Estiramiento pantorrilla parado: 45s c/lado", "Dorsiflexión tobillo contra pared: 10 reps c/lado"] },
+          { name: "Columna y glúteo", type: "mov", title: "Recuperación espinal", items: ["Rotación espinal supina: 10 reps c/lado", "Glúteo figura 4: 60s c/lado", "Estiramiento isquio con liga: 45–60s c/lado", "Niño extendido con desviaciones laterales: 60s"] },
+        ]
+      }
+    ]
+  }
+];
+
+let activePhase = 0;
+const colors = { run:'#3B8BD4', gym:'#1D9E75', long:'#BA7517', mov:'#D4537E', rest:'#888780' };
+
+function showPhase(idx) {
+  activePhase = idx;
+  document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+  renderPhase();
+}
+
+function renderPhase() {
+  const p = PHASES[activePhase];
+  let html = `<div class="phase-desc"><span class="phase-range">${p.range}</span> — ${p.desc}</div>`;
+  p.weeks.forEach((w, wi) => {
+    const id = `w${activePhase}-${wi}`;
+    const miniDots = (w.days||[]).map(d => `<div class="mini-day" style="background:${colors[d.type]||colors.rest}"></div>`).join('');
+    html += `
+      <div class="week">
+        <div class="week-header" onclick="toggleWeek('${id}')">
+          <span class="week-num">${w.num}</span>
+          <span class="week-label">${w.label}</span>
+          ${w.km ? `<span class="week-km">${w.km}</span>` : ''}
+          <div class="week-mini">${miniDots}</div>
+          <span class="chevron" id="chev-${id}">▼</span>
+        </div>
+        <div class="week-body" id="${id}">
+          <div class="struct-note">${STRUCT}</div>
+          <div class="days">
+            ${(w.days||[]).map(d => `
+              <div class="day-card ${d.type}">
+                <div class="day-name">${d.name}</div>
+                <div class="day-title">${d.title}</div>
+                <ul class="day-items">${d.items.map(i=>`<li>${i}</li>`).join('')}</ul>
+              </div>`).join('')}
+          </div>
+        </div>
+      </div>`;
+  });
+  document.getElementById('phase-content').innerHTML = html;
+}
+
+function toggleWeek(id) {
+  const b = document.getElementById(id);
+  const c = document.getElementById('chev-'+id);
+  b.classList.toggle('open');
+  c.classList.toggle('open', b.classList.contains('open'));
+}
+
+renderPhase();
+</script>
+</body>
+</html>
