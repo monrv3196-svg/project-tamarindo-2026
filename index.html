@@ -93,7 +93,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ar
 }
 .day-items { font-size: 12px; color: var(--text2); line-height: 1.8; margin-bottom: 2px; }
 .day-items li { list-style: none; padding-left: 12px; position: relative; }
-.day-items li::before { content: "–"; position: absolute; left: 0; color: var(--text3); }
+.day-items li::before { content: "-"; position: absolute; left: 0; color: var(--text3); }
 .section-intro { font-size: 14px; color: var(--text2); margin-bottom: 1.5rem; padding: 12px 16px; background: var(--bg2); border-radius: 10px; border-left: 3px solid var(--border2); line-height: 1.7; }
 .section-intro strong { color: var(--text); font-weight: 600; }
 .video-block { margin-bottom: 2rem; }
@@ -107,7 +107,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ar
 .routine-card h3 { font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--text); }
 .routine-card ul { font-size: 12px; color: var(--text2); line-height: 1.8; }
 .routine-card ul li { list-style: none; padding-left: 12px; position: relative; }
-.routine-card ul li::before { content: "–"; position: absolute; left: 0; color: var(--text3); }
+.routine-card ul li::before { content: "-"; position: absolute; left: 0; color: var(--text3); }
 .tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 20px; margin-right: 6px; margin-bottom: 10px; font-weight: 500; }
 .tag-long { background: #FAEEDA; color: #854F0B; }
 .tag-short { background: #E1F5EE; color: #0F6E56; }
@@ -121,13 +121,15 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ar
 }
 .divider { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
 .footer { margin-top: 3rem; text-align: center; font-size: 12px; color: var(--text3); }
+.pace-ref { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; font-size: 12px; color: var(--text2); line-height: 1.7; }
+.pace-ref span { color: var(--text); font-weight: 600; }
 </style>
 </head>
 <body>
 <div class="page">
   <div class="header">
-    <h1>Project Tamarindo 2026 🏃</h1>
-    <p>Maratón de Tamarindo · 5 de septiembre 2026 · 25 semanas · inicia lunes 16 marzo</p>
+    <h1>Project Tamarindo 2026</h1>
+    <p>Maraton de Tamarindo · 5 de septiembre 2026 · objetivo 3:55 · 9 semanas al largada</p>
   </div>
 
   <div class="main-tabs-wrap">
@@ -139,18 +141,20 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ar
   </div>
 
   <div id="main-plan" class="main-section active">
+    <div class="pace-ref">
+      Objetivo 3:55 - pace de carrera: <span>5:34 min/km</span> · Zona 2 real: <span>140-160 bpm</span> · pace zona 2 estimado: <span>8:30-9:00 min/km</span> · Tempo (umbral): <span>5:10-5:25 min/km, FC 160-170 bpm</span> · Siempre guiarse por FC, no por pace.
+    </div>
     <div class="alert-box">
-      Zona 2 real: 140–160 bpm · pace ~8:30–9:00 min/km en fresco. En calor sumar 5–8 bpm. Guiarse siempre por FC. Lunes = recovery casi siempre. Calidad (fartlek/intervalos/tempo) solo cuando el plan lo indica — no todas las semanas.
+      Semana actual (jul 5): reactivacion post-viaje. Long run domingo 5 jul de 10-12 km suave, por FC. No compensar los fondos perdidos. La proxima semana (jul 6) se retoma el plan con normalidad desde la semana 17 del ciclo original, ajustado para llegar bien al 5 de septiembre.
     </div>
     <div class="tabs" id="phase-tabs">
-      <div class="tab active" onclick="showPhase(0)">Fase 1 — Base</div>
-      <div class="tab" onclick="showPhase(1)">Fase 2 — Construcción</div>
-      <div class="tab" onclick="showPhase(2)">Fase 3 — Pico</div>
-      <div class="tab" onclick="showPhase(3)">Fase 4 — Taper</div>
+      <div class="tab active" onclick="showPhase(0)">Reactivacion</div>
+      <div class="tab" onclick="showPhase(1)">Pico final</div>
+      <div class="tab" onclick="showPhase(2)">Taper</div>
     </div>
     <div class="legend">
-      <div class="leg"><div class="dot" style="background:#3B8BD4"></div>Carrera zona 2 / recovery / calidad</div>
-      <div class="leg"><div class="dot" style="background:#1D9E75"></div>Gym + banda easy</div>
+      <div class="leg"><div class="dot" style="background:#3B8BD4"></div>Carrera</div>
+      <div class="leg"><div class="dot" style="background:#1D9E75"></div>Gym completo (sin correr)</div>
       <div class="leg"><div class="dot" style="background:#BA7517"></div>Long run (por FC)</div>
       <div class="leg"><div class="dot" style="background:#D4537E"></div>Descanso activo + core</div>
       <div class="leg"><div class="dot" style="background:#888780"></div>Descanso total</div>
@@ -160,142 +164,141 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ar
 
   <div id="main-mobility" class="main-section">
     <div class="section-intro">
-      Dos rutinas según la intensidad de la sesión. <strong>Deep stretching después de cada long run, siempre.</strong> Rutina corta después de carreras normales y gym.
+      Dos rutinas segun la intensidad. Deep stretching despues de cada long run, siempre. Rutina corta despues de carreras normales y gym.
     </div>
     <div class="video-block">
-      <div class="video-label">Post long run · siempre obligatorio</div>
+      <div class="video-label">Post long run - siempre obligatorio</div>
       <div class="video-title">Deep stretching post-carrera</div>
-      <div class="video-desc">Obligatorio después de cada long run del sábado sin excepción.</div>
+      <div class="video-desc">Obligatorio despues de cada long run del sabado sin excepcion. Tambien util despues de sesiones de calidad largas.</div>
       <span class="tag tag-long">Long run siempre</span>
       <div class="video-embed"><iframe src="https://www.youtube.com/embed/Jc89ecE1itI" allowfullscreen loading="lazy"></iframe></div>
     </div>
     <div class="routine-grid">
-      <div class="routine-card"><h3>Cadera y glúteo</h3><ul>
-        <li>Paloma (pigeon pose): 60–90s c/lado</li>
-        <li>Hip 90/90: 60–90s c/lado</li>
+      <div class="routine-card"><h3>Cadera y gluteo</h3><ul>
+        <li>Paloma (pigeon pose): 60-90s c/lado</li>
+        <li>Hip 90/90: 60-90s c/lado</li>
         <li>Figura 4 tumbado: 60s c/lado</li>
         <li>Hip flexor en estocada profunda: 60s c/lado</li>
       </ul></div>
       <div class="routine-card"><h3>Isquiotibiales y espalda baja</h3><ul>
         <li>Estiramiento isquio tumbado: 60s c/lado</li>
         <li>Doblez hacia adelante de pie: 45s</li>
-        <li>Niño extendido con desviaciones: 60s</li>
-        <li>Rotación espinal supina: 10 reps c/lado</li>
+        <li>Nino extendido con desviaciones: 60s</li>
+        <li>Rotacion espinal supina: 10 reps c/lado</li>
       </ul></div>
       <div class="routine-card"><h3>Pantorrilla y tobillo</h3><ul>
         <li>Foam roller pantorrilla: 90s c/lado</li>
-        <li>Estiramiento pantorrilla en pared: 60s c/lado</li>
-        <li>Sóleo con rodilla flexionada: 45s c/lado</li>
-        <li>Círculos de tobillo: 10 reps c/lado</li>
+        <li>Pantorrilla en pared: 60s c/lado</li>
+        <li>Soleo con rodilla flexionada: 45s c/lado</li>
+        <li>Circulos de tobillo: 10 reps c/lado</li>
       </ul></div>
-      <div class="routine-card"><h3>Cuádriceps e IT band</h3><ul>
-        <li>Foam roller cuádriceps: 90s c/lado</li>
+      <div class="routine-card"><h3>Cuadriceps e IT band</h3><ul>
+        <li>Foam roller cuadriceps: 90s c/lado</li>
         <li>Foam roller IT band: 90s c/lado</li>
-        <li>Estiramiento cuádriceps parado: 45s c/lado</li>
+        <li>Cuadriceps parado: 45s c/lado</li>
         <li>World's greatest stretch: 5 reps lentas c/lado</li>
       </ul></div>
     </div>
     <hr class="divider">
     <div class="video-block">
-      <div class="video-label">Post carrera normal · post gym</div>
-      <div class="video-title">Estiramiento rápido post-carrera</div>
-      <div class="video-desc">Para después de carreras de 30–60 minutos o sesiones de gimnasio.</div>
-      <span class="tag tag-short">Lun / Mar / Mié / Jue</span>
+      <div class="video-label">Post carrera normal - post gym</div>
+      <div class="video-title">Estiramiento rapido post-carrera</div>
+      <div class="video-desc">Para despues de carreras de 30-55 minutos o sesiones de gimnasio.</div>
+      <span class="tag tag-short">Lun / Mar / Jue</span>
       <div class="video-embed"><iframe src="https://www.youtube.com/embed/taiBlDZhFT4" allowfullscreen loading="lazy"></iframe></div>
     </div>
     <div class="routine-grid">
-      <div class="routine-card"><h3>Secuencia rápida (10 min)</h3><ul>
+      <div class="routine-card"><h3>Secuencia rapida (10 min)</h3><ul>
         <li>Paloma: 45s c/lado</li>
         <li>Hip flexor en estocada: 45s c/lado</li>
         <li>Isquio tumbado: 45s c/lado</li>
         <li>Pantorrilla en pared: 45s c/lado</li>
         <li>Figura 4 tumbado: 45s c/lado</li>
-        <li>Rotación espinal: 8 reps c/lado</li>
-        <li>Cuádriceps parado: 30s c/lado</li>
+        <li>Rotacion espinal: 8 reps c/lado</li>
+        <li>Cuadriceps parado: 30s c/lado</li>
       </ul></div>
-      <div class="routine-card"><h3>Cuándo usar cada rutina</h3><ul>
-        <li>Lunes / Martes post-carrera: rutina corta</li>
-        <li>Miércoles / Jueves post-gym: rutina corta</li>
-        <li>Viernes: movilidad del día de descanso activo</li>
-        <li>Sábado post long run: deep stretching siempre</li>
+      <div class="routine-card"><h3>Cuando usar cada rutina</h3><ul>
+        <li>Lunes / Martes / Jueves post-carrera: rutina corta</li>
+        <li>Miercoles post-gym: rutina corta</li>
+        <li>Viernes: movilidad del descanso activo</li>
+        <li>Sabado post long run: deep stretching siempre</li>
       </ul></div>
     </div>
   </div>
 
   <div id="main-strength" class="main-section">
     <div class="section-intro">
-      Dos recursos para complementar el gimnasio. <strong>Ligas para activación pre-gym y pre-carrera.</strong> Rodillas fuertes, prioritario en fase 3.
+      Dos recursos para complementar el gimnasio. Ligas para activacion pre-carrera. Rodillas fuertes, prioritario en estas semanas finales.
     </div>
     <div class="video-block">
-      <div class="video-label">Activación · ligas pequeñas</div>
-      <div class="video-title">Fuerza de piernas y glúteos con ligas</div>
-      <div class="video-desc">Pre-gym miércoles y jueves. Pre-carrera lunes y martes como parte del calentamiento.</div>
-      <span class="tag tag-strength">Pre-gym · Pre-carrera lun/mar</span>
+      <div class="video-label">Activacion - ligas pequenas</div>
+      <div class="video-title">Fuerza de piernas y gluteos con ligas</div>
+      <div class="video-desc">Pre-carrera lunes, martes y jueves. Pre-gym miercoles como activacion antes de empezar.</div>
+      <span class="tag tag-strength">Pre-carrera lun/mar/jue</span>
       <div class="video-embed"><iframe src="https://www.youtube.com/embed/h7gQ3B-fvqU?start=516" allowfullscreen loading="lazy"></iframe></div>
     </div>
     <div class="routine-grid">
-      <div class="routine-card"><h3>Glúteo medio</h3><ul>
-        <li>Clamshell: 3×15–20 c/lado</li>
-        <li>Fire hydrant: 3×12–15 c/lado</li>
-        <li>Abducción lateral parado: 3×15 c/lado</li>
-        <li>Monster walk lateral: 3×15 pasos c/lado</li>
+      <div class="routine-card"><h3>Gluteo medio</h3><ul>
+        <li>Clamshell: 3x15 c/lado</li>
+        <li>Fire hydrant: 3x12 c/lado</li>
+        <li>Abduccion lateral parado: 3x15 c/lado</li>
+        <li>Monster walk lateral: 3x15 pasos c/lado</li>
       </ul></div>
-      <div class="routine-card"><h3>Glúteo mayor</h3><ul>
-        <li>Donkey kick con liga: 3×12–15 c/lado</li>
-        <li>Hip thrust con liga en rodillas: 3×15</li>
-        <li>Pull-through con liga: 3×12</li>
-        <li>Single-leg glute bridge: 3×10 c/lado</li>
+      <div class="routine-card"><h3>Gluteo mayor</h3><ul>
+        <li>Donkey kick con liga: 3x12 c/lado</li>
+        <li>Hip thrust con liga en rodillas: 3x15</li>
+        <li>Single-leg glute bridge: 3x10 c/lado</li>
       </ul></div>
-      <div class="routine-card"><h3>Cuándo</h3><ul>
-        <li>Lunes y martes: obligatorio pre-carrera (8 min)</li>
-        <li>Miércoles: activación pre-gym (5 min)</li>
-        <li>Progresión: aumentar resistencia cada 3–4 sem</li>
+      <div class="routine-card"><h3>Cuando</h3><ul>
+        <li>Lunes, martes, jueves: 8 min pre-carrera obligatorio</li>
+        <li>Miercoles: 5 min pre-gym</li>
+        <li>En taper: reducir a 2 series por ejercicio</li>
       </ul></div>
     </div>
     <hr class="divider">
     <div class="video-block">
-      <div class="video-label">Prevención · rodillas fuertes</div>
+      <div class="video-label">Prevencion - rodillas fuertes</div>
       <div class="video-title">Fortalecimiento de rodillas para runners</div>
-      <div class="video-desc">Prioritario en fase 3 y si sentís molestia en rodilla en cualquier momento.</div>
-      <span class="tag tag-knee">Prevención</span><span class="tag tag-knee">Fase 3 prioritaria</span>
+      <div class="video-desc">Prioritario en estas semanas finales. Si sientes molestia en rodilla en cualquier momento, esto es lo primero.</div>
+      <span class="tag tag-knee">Prevencion</span><span class="tag tag-knee">Semanas finales prioritario</span>
       <div class="video-embed"><iframe src="https://www.youtube.com/embed/3e8cwyMYc-8?start=413" allowfullscreen loading="lazy"></iframe></div>
     </div>
     <div class="routine-grid">
       <div class="routine-card"><h3>Estabilidad de rodilla</h3><ul>
-        <li>Terminal knee extension (TKE): 3×15 c/lado</li>
-        <li>Banded squat con liga en rodillas: 3×12</li>
-        <li>Step-down excéntrico: 3×10 c/lado (lento)</li>
-        <li>Wall sit: 3×30–45s</li>
+        <li>Terminal knee extension (TKE): 3x15 c/lado</li>
+        <li>Banded squat con liga en rodillas: 3x12</li>
+        <li>Step-down excentrico: 3x10 c/lado (lento)</li>
+        <li>Wall sit: 3x30s</li>
       </ul></div>
       <div class="routine-card"><h3>Cadena posterior</h3><ul>
-        <li>Nordic curl asistido: 3×6–8 (sem 8+)</li>
-        <li>Peso muerto rumano unilateral: 3×8 c/lado</li>
-        <li>Isquio excéntrico con liga: 3×10 c/lado</li>
-        <li>Pantorrilla excéntrica en escalón: 3×12 c/lado</li>
+        <li>Peso muerto rumano unilateral KB: 3x8 c/lado</li>
+        <li>Isquio excentrico con liga: 3x10 c/lado</li>
+        <li>Pantorrilla excentrica en escalon: 3x12 c/lado</li>
       </ul></div>
-      <div class="routine-card"><h3>Señales de alerta</h3><ul>
-        <li>Dolor en rodilla durante o después de correr</li>
-        <li>Inflamación visible en la articulación</li>
+      <div class="routine-card"><h3>Senales de alerta</h3><ul>
+        <li>Dolor en rodilla durante o despues de correr</li>
+        <li>Inflamacion visible</li>
         <li>Dolor al bajar escaleras</li>
         <li>Chasquido con molestia (no solo ruido)</li>
       </ul></div>
     </div>
   </div>
 
-  <div class="footer">Project Tamarindo 2026 · Maratón 5 de septiembre 2026</div>
+  <div class="footer">Project Tamarindo 2026 · Maraton 5 de septiembre 2026 · objetivo 3:55</div>
 </div>
 
 <script>
-const STRUCT = "Lun: recovery run · Mar: zona 2 o calidad (cuando aplica) · Mié: 30min easy banda + tren inferior · Jue: 40min banda + tren superior · Vie: descanso activo + core · Sáb: long run por FC · Dom: descanso";
+const STRUCT = "Lun: recovery run · Mar: calidad o zona 2 · Mie: gym completo (sin correr) · Jue: carrera · Vie: descanso activo + core · Sab: long run por FC · Dom: descanso";
 const colors = { run:'#3B8BD4', gym:'#1D9E75', long:'#BA7517', mov:'#D4537E', rest:'#888780' };
 
-function getDate(wk, dow) {
-  const start = new Date(2026, 2, 16);
+// Week 0 offset = semana del 5 de julio (reactivacion)
+function getDate(absDay) {
+  const start = new Date(2026, 6, 5); // 5 julio
   const d = new Date(start);
-  d.setDate(d.getDate() + wk * 7 + dow);
-  const days = ['lun','mar','mié','jue','vie','sáb','dom'];
+  d.setDate(d.getDate() + absDay);
+  const days = ['dom','lun','mar','mie','jue','vie','sab'];
   const months = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
-  return `${days[dow]} ${d.getDate()} ${months[d.getMonth()]}`;
+  return `${days[d.getDay()]} ${d.getDate()} ${months[d.getMonth()]}`;
 }
 
 function blk(cls, label) { return `<div class="block-label ${cls}">${label}</div>`; }
@@ -305,9 +308,9 @@ function warmup() {
   return blk('bl-warm','Calentamiento · 8 min') + items([
     'Trote suave: 3 min',
     'Rotaciones de cadera: 10 reps c/lado',
-    'Leg swings adelante/atrás y lateral: 10 reps c/lado',
+    'Leg swings adelante/atras y lateral: 10 reps c/lado',
     'Sentadilla profunda con pausa: 5 reps',
-    'World\'s greatest stretch: 3 reps c/lado'
+    "World's greatest stretch: 3 reps c/lado"
   ]);
 }
 
@@ -318,157 +321,64 @@ function cooldown() {
     'Isquio tumbado: 45s c/lado',
     'Pantorrilla en pared: 45s c/lado',
     'Figura 4 tumbado: 45s c/lado',
-    'Rotación espinal supina: 8 reps c/lado'
+    'Rotacion espinal supina: 8 reps c/lado'
   ]);
 }
 
 function cooldownLong() {
-  return blk('bl-cool','Deep stretching · 20–25 min') + items([
+  return blk('bl-cool','Deep stretching · 20-25 min') + items([
     'Seguir video de deep stretching del tab Movilidad (obligatorio)',
-    'Foam roller cuádriceps + IT band + pantorrilla: 90s c/lado',
+    'Foam roller cuadriceps + IT band + pantorrilla: 90s c/lado',
     'Paloma: 90s c/lado · Hip 90/90: 90s c/lado',
     'Hip flexor profundo: 60s c/lado · Isquio tumbado: 60s c/lado',
-    'Figura 4: 60s c/lado · Niño extendido: 60s',
-    'Rotación espinal supina: 10 reps c/lado'
+    'Figura 4: 60s c/lado · Nino extendido: 60s',
+    'Rotacion espinal supina: 10 reps c/lado'
   ]);
 }
 
 function ligasPre() {
-  return blk('bl-liga','Activación ligas · pre-carrera · 8 min') + items([
-    'Clamshell con liga: 2×15 c/lado',
-    'Monster walk lateral: 2×15 pasos c/lado',
-    'Abducción lateral parado: 2×15 c/lado',
-    'Donkey kick con liga: 2×12 c/lado'
+  return blk('bl-liga','Activacion ligas · pre-carrera · 8 min') + items([
+    'Clamshell con liga: 2x15 c/lado',
+    'Monster walk lateral: 2x15 pasos c/lado',
+    'Abduccion lateral parado: 2x15 c/lado',
+    'Donkey kick con liga: 2x12 c/lado'
   ]);
 }
 
 function ligasGym() {
-  return blk('bl-liga','Activación ligas · pre-gym · 5 min') + items([
-    'Clamshell: 2×15 c/lado',
-    'Fire hydrant: 2×12 c/lado',
-    'Monster walk lateral: 2×15 pasos c/lado'
-  ]);
-}
-
-function bandaEasy(min) {
-  return blk('bl-run', `Banda easy · ${min} min zona 2`) + items([
-    `${min} min zona 2, FC 140–160 bpm, ritmo conversacional`,
-    'Hacer antes de los ejercicios de gym'
+  return blk('bl-liga','Activacion ligas · pre-gym · 5 min') + items([
+    'Clamshell: 2x15 c/lado',
+    'Fire hydrant: 2x12 c/lado',
+    'Monster walk lateral: 2x15 pasos c/lado'
   ]);
 }
 
 function recovery(min) {
   return blk('bl-run', `Recovery run · ${min} min`) + items([
-    `${min} min zona 1–2, FC máx 150 bpm`,
-    'Genuinamente suave — si dudás si es muy fácil, es correcto',
-    'El objetivo es recuperar, no entrenar',
+    `${min} min zona 1-2, FC max 150 bpm`,
+    'Genuinamente suave - si dudas si es muy facil, es correcto',
     'Salir temprano para evitar calor'
   ]);
 }
 
 function zona2(min, km) {
   return blk('bl-run', `Zona 2 · ${min} min`) + items([
-    `${min} min zona 2, FC 145–160 bpm`,
+    `${min} min zona 2, FC 145-160 bpm`,
     `~${km} km estimados`,
-    'Ritmo conversacional, guiarse por FC no por pace'
+    'Ritmo conversacional, guiarse por FC'
   ]);
 }
 
-function fartlek(desc) {
-  return blk('bl-run','Fartlek') + items(desc);
-}
-
-function intervalos(desc) {
-  return blk('bl-run','Intervalos') + items(desc);
-}
-
-function tempo(desc) {
-  return blk('bl-run','Tempo') + items(desc);
-}
+function tempoRun(desc) { return blk('bl-run','Tempo') + items(desc); }
+function fartlek(desc) { return blk('bl-run','Fartlek') + items(desc); }
 
 function longRun(dist, notas) {
   return blk('bl-run', `Long run · ${dist}`) + items([
     `Objetivo: ${dist}`,
-    'Guiarse por FC: mantener 140–160 bpm todo el tiempo',
-    'Salir temprano para evitar calor',
+    'FC: mantener 140-160 bpm',
+    'Salir temprano, antes de 7am',
     'Si FC sube de 162: bajar el pace o caminar',
     ...notas
-  ]);
-}
-
-function trenInferior(fase) {
-  if (fase === 1) return blk('bl-lower','Tren inferior') + items([
-    'Sentadilla goblet KB: 3×12',
-    'Peso muerto rumano mancuernas: 3×10',
-    'Hip thrust con mancuerna: 3×12',
-    'Estocadas con mancuernas: 3×10 c/lado',
-    'Step-up con mancuernas: 3×10 c/lado',
-    'Sentadilla sumo KB: 3×12'
-  ]);
-  if (fase === 2) return blk('bl-lower','Tren inferior') + items([
-    'Sentadilla goblet KB pesado: 4×10',
-    'Peso muerto rumano mancuernas: 4×8',
-    'Hip thrust mancuerna pesada: 4×10',
-    'Bulgarian split squat KB: 4×8 c/lado',
-    'Step-up elevado mancuernas: 3×10 c/lado',
-    'KB swing: 4×12',
-    'Single-leg deadlift KB: 3×8 c/lado'
-  ]);
-  return blk('bl-lower','Tren inferior · mantenimiento') + items([
-    'Sentadilla goblet KB: 3×10',
-    'Hip thrust mancuerna: 3×10',
-    'Bulgarian split squat KB: 3×8 c/lado',
-    'KB swing: 3×12',
-    'Single-leg hip thrust: 3×10 c/lado'
-  ]);
-}
-
-function core(nivel) {
-  if (nivel === 1) return blk('bl-core','Core') + items([
-    'Plancha frontal: 3×40s',
-    'Dead bug: 3×10 c/lado',
-    'Bird-dog: 3×10 c/lado',
-    'Plancha lateral: 3×30s c/lado'
-  ]);
-  return blk('bl-core','Core') + items([
-    'Plancha frontal: 3×50s',
-    'Dead bug: 3×12 c/lado',
-    'Pallof press con liga: 3×12 c/lado',
-    'Plancha lateral + elevación cadera: 3×10 c/lado'
-  ]);
-}
-
-function trenSuperior(fase) {
-  if (fase === 1) return blk('bl-upper','Tren superior') + items([
-    'Press pecho mancuernas: 3×12',
-    'Flexiones: 3×10–12',
-    'Curl bíceps mancuernas: 3×12',
-    'Press tríceps overhead: 3×12',
-    'Press hombros mancuernas: 3×12',
-    'Elevaciones laterales: 3×15',
-    'Remo 1 brazo mancuerna: 3×12 c/lado',
-    'Face pull con liga: 3×15',
-    '(cargas ligeras — estabilidad, no hipertrofia)'
-  ]);
-  if (fase === 2) return blk('bl-upper','Tren superior') + items([
-    'Press pecho mancuernas: 3×12',
-    'Flexiones con mancuernas en suelo: 3×12',
-    'Curl martillo: 3×12',
-    'Press tríceps overhead: 3×12',
-    'Press hombros mancuernas: 3×12',
-    'Elevaciones laterales: 3×15',
-    'Remo 1 brazo mancuerna: 4×10 c/lado',
-    'Face pull con liga: 3×15',
-    'Superman isométrico en suelo: 3×10'
-  ]);
-  return blk('bl-upper','Tren superior · mantenimiento') + items([
-    'Press pecho mancuernas: 2×12',
-    'Curl martillo: 2×12',
-    'Press tríceps overhead: 2×12',
-    'Press hombros mancuernas: 2×12',
-    'Elevaciones laterales: 2×15',
-    'Remo 1 brazo mancuerna: 2×10 c/lado',
-    'Face pull con liga: 2×15'
   ]);
 }
 
@@ -479,345 +389,227 @@ function viernesCore() {
       'Hip 90/90: 60s c/lado',
       'Paloma: 45s c/lado',
       'Pantorrilla en pared: 45s c/lado',
-      'Rotación espinal supina: 10 reps c/lado'
+      'Rotacion espinal supina: 10 reps c/lado'
     ]),
     blk('bl-core','Core · viernes') + items([
-      'Plancha frontal: 3×50s',
-      'Dead bug: 3×12 c/lado',
-      'Bird-dog: 3×10 c/lado',
-      'Plancha lateral: 3×35s c/lado',
-      'Pallof press con liga: 3×12 c/lado (sem 7+)'
+      'Plancha frontal: 3x50s',
+      'Dead bug: 3x12 c/lado',
+      'Bird-dog: 3x10 c/lado',
+      'Plancha lateral: 3x35s c/lado',
+      'Pallof press con liga: 3x12 c/lado'
     ])
   ];
 }
 
+// GYM COMPLETO miercoles (tren inferior + tren superior, sin correr)
+function gymCompleto(fase) {
+  let lower, upper, core;
+  if (fase === 'pico') {
+    lower = blk('bl-lower','Tren inferior · mantenimiento') + items([
+      'Sentadilla goblet KB: 3x10',
+      'Hip thrust mancuerna: 3x10',
+      'Bulgarian split squat KB: 3x8 c/lado',
+      'KB swing: 3x12',
+      'Peso muerto rumano mancuernas: 3x8'
+    ]);
+    upper = blk('bl-upper','Tren superior') + items([
+      'Press pecho mancuernas: 3x12',
+      'Curl martillo: 3x12',
+      'Press triceps overhead: 3x12',
+      'Press hombros mancuernas: 3x12',
+      'Elevaciones laterales: 3x15',
+      'Remo 1 brazo mancuerna: 3x10 c/lado',
+      'Face pull con liga: 3x15',
+      '(cargas moderadas - no buscar hipertrofia)'
+    ]);
+    core = blk('bl-core','Core') + items([
+      'Plancha frontal: 3x50s',
+      'Dead bug: 3x12 c/lado',
+      'Pallof press con liga: 3x12 c/lado',
+      'Plancha lateral + elevacion cadera: 3x10 c/lado'
+    ]);
+  } else { // taper
+    lower = blk('bl-lower','Tren inferior · ligero') + items([
+      'Sentadilla goblet KB: 2x10',
+      'Hip thrust mancuerna: 2x10',
+      'KB swing: 2x12'
+    ]);
+    upper = blk('bl-upper','Tren superior · ligero') + items([
+      'Press pecho mancuernas: 2x12',
+      'Curl martillo: 2x12',
+      'Press hombros mancuernas: 2x12',
+      'Remo 1 brazo mancuerna: 2x10 c/lado',
+      'Face pull con liga: 2x15'
+    ]);
+    core = blk('bl-core','Core') + items([
+      'Plancha frontal: 2x50s',
+      'Dead bug: 2x10 c/lado',
+      'Plancha lateral: 2x30s c/lado'
+    ]);
+  }
+  return [lower, upper, core];
+}
+
+// Dias con offset absoluto desde 5 julio
+// offsets: dom=0, lun=1, mar=2, mie=3, jue=4, vie=5, sab=6
+// Semana reactivacion: 5-11 jul
+// Semanas pico: 6 jul - 2 ago (sem 1 a 4 del pico)
+// Taper: 3 ago - 5 sep
+
 const PHASES = [
   {
-    name:"Fase 1", range:"16 mar – 26 abr · semanas 1–6",
-    desc:"Base aeróbica pura. Lunes = recovery casi siempre. Martes = zona 2. Calidad solo 2 veces en toda esta fase (fartlek muy suave, sem 3 y sem 5). Establecer hábito de gym y movilidad.",
+    name:"Reactivacion",
+    range:"5-11 jul · semana post-viaje",
+    desc:"Reactivacion suave post-viaje. El long run del domingo 5 jul es el punto de arranque. No compensar nada. Esta semana es para volver a la rutina, no para ponerse al dia con volumen perdido.",
     weeks:[
-      { num:"Sem 1", label:"16–21 mar", km:"~18 km", wk:0, days:[
-        {name:"Lunes",dow:0,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(35),cooldown()]},
-        {name:"Martes",dow:1,type:"run",title:"Zona 2",extra:[warmup(),ligasPre(),zona2(40,'5–6'),cooldown()]},
-        {name:"Miércoles",dow:2,type:"gym",title:"Banda easy 30 min + tren inferior + core",extra:[warmup(),ligasGym(),bandaEasy(30),trenInferior(1),core(1),cooldown()]},
-        {name:"Jueves",dow:3,type:"gym",title:"Banda 40 min + tren superior + core",extra:[warmup(),bandaEasy(40),trenSuperior(1),core(1),cooldown()]},
-        {name:"Viernes",dow:4,type:"mov",title:"Descanso activo + core",...{extra:viernesCore()}},
-        {name:"Sábado",dow:5,type:"long",title:"Long run — por FC",extra:[warmup(),longRun('50 min / ~6–7 km',['Primera semana: no forzar distancia','FC objetivo: 140–155 bpm']),cooldownLong()]},
-        {name:"Domingo",dow:6,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperación completa','Opcional: caminata 20 min'])]},
-      ]},
-      { num:"Sem 2", label:"23–28 mar", km:"~20 km", wk:1, days:[
-        {name:"Lunes",dow:0,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(35),cooldown()]},
-        {name:"Martes",dow:1,type:"run",title:"Zona 2",extra:[warmup(),ligasPre(),zona2(45,'6'),cooldown()]},
-        {name:"Miércoles",dow:2,type:"gym",title:"Banda easy 30 min + tren inferior + core",extra:[warmup(),ligasGym(),bandaEasy(30),trenInferior(1),core(1),cooldown()]},
-        {name:"Jueves",dow:3,type:"gym",title:"Banda 40 min + tren superior + core",extra:[warmup(),bandaEasy(40),trenSuperior(1),core(1),cooldown()]},
-        {name:"Viernes",dow:4,type:"mov",title:"Descanso activo + core",...{extra:viernesCore()}},
-        {name:"Sábado",dow:5,type:"long",title:"Long run — por FC",extra:[warmup(),longRun('60 min / ~7–8 km',['FC objetivo: 140–155 bpm']),cooldownLong()]},
-        {name:"Domingo",dow:6,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperación completa'])]},
-      ]},
-      { num:"Sem 3", label:"30 mar – 4 abr", km:"~22 km", wk:2, days:[
-        {name:"Lunes",dow:0,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(35),cooldown()]},
-        {name:"Martes",dow:1,type:"run",title:"Fartlek suave — primera vez en el plan",extra:[
-          warmup(),ligasPre(),
-          fartlek(['45 min total en zona 2','Incluir 4–5 acelerones espontáneos de 20–30s por sensación','Acelerá cuando te sientas bien, no a tope','Recuperar trotando hasta que FC baje a 150 bpm','No es estructurado — es juego, no sesión de calidad dura','~6–7 km']),
-          cooldown()
-        ]},
-        {name:"Miércoles",dow:2,type:"gym",title:"Banda easy 30 min + tren inferior + core",extra:[warmup(),ligasGym(),bandaEasy(30),trenInferior(1),core(1),cooldown()]},
-        {name:"Jueves",dow:3,type:"gym",title:"Banda 40 min + tren superior + core",extra:[warmup(),bandaEasy(40),trenSuperior(1),core(1),cooldown()]},
-        {name:"Viernes",dow:4,type:"mov",title:"Descanso activo + core",...{extra:viernesCore()}},
-        {name:"Sábado",dow:5,type:"long",title:"Long run — por FC",extra:[warmup(),longRun('65–70 min / ~9 km',['FC objetivo: 140–155 bpm']),cooldownLong()]},
-        {name:"Domingo",dow:6,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperación completa'])]},
-      ]},
-      { num:"Sem 4", label:"6–11 abr · DESCARGA", km:"~15 km", wk:3, days:[
-        {name:"Lunes",dow:0,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(30),cooldown()]},
-        {name:"Martes",dow:1,type:"run",title:"Zona 2 suave",extra:[warmup(),ligasPre(),zona2(35,'4–5'),cooldown()]},
-        {name:"Miércoles",dow:2,type:"gym",title:"Banda easy 30 min + tren inferior ligero + core",extra:[
-          warmup(),ligasGym(),bandaEasy(30),
-          blk('bl-lower','Tren inferior · 65% carga')+items(['Sentadilla goblet KB: 2×10','Hip thrust: 2×10','Estocadas: 2×10 c/lado']),
-          blk('bl-core','Core')+items(['Plancha: 2×40s','Dead bug: 2×10 c/lado']),
-          cooldown()
-        ]},
-        {name:"Jueves",dow:3,type:"gym",title:"Banda 40 min + tren superior ligero + core",extra:[
-          warmup(),bandaEasy(40),
-          blk('bl-upper','Tren superior · 65% carga')+items(['Press pecho: 2×12','Curl bíceps: 2×12','Press hombros: 2×12','Remo 1 brazo: 2×10 c/lado']),
-          blk('bl-core','Core')+items(['Plancha lateral: 2×30s c/lado','Dead bug: 2×10 c/lado']),
-          cooldown()
-        ]},
-        {name:"Viernes",dow:4,type:"mov",title:"Descanso activo + core",...{extra:viernesCore()}},
-        {name:"Sábado",dow:5,type:"long",title:"Long run reducido — por FC",extra:[warmup(),longRun('45 min / ~5–6 km',['Semana de descarga, muy suave','FC objetivo: 140–150 bpm']),cooldownLong()]},
-        {name:"Domingo",dow:6,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperación completa'])]},
-      ]},
-      { num:"Sem 5", label:"13–18 abr", km:"~24 km", wk:4, days:[
-        {name:"Lunes",dow:0,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(40),cooldown()]},
-        {name:"Martes",dow:1,type:"run",title:"Zona 2",extra:[warmup(),ligasPre(),zona2(50,'7'),cooldown()]},
-        {name:"Miércoles",dow:2,type:"gym",title:"Banda easy 30 min + tren inferior + core",extra:[warmup(),ligasGym(),bandaEasy(30),trenInferior(1),core(1),cooldown()]},
-        {name:"Jueves",dow:3,type:"gym",title:"Banda 40 min con fartlek suave integrado + tren superior + core",extra:[
-          warmup(),
-          fartlek(['40 min en banda','30 min zona 2','Incluir 3 acelerones de 30s espontáneos en la segunda mitad','10 min zona 2 de vuelta a calma']),
-          trenSuperior(1),core(1),cooldown()
-        ]},
-        {name:"Viernes",dow:4,type:"mov",title:"Descanso activo + core",...{extra:viernesCore()}},
-        {name:"Sábado",dow:5,type:"long",title:"Long run — por FC",extra:[warmup(),longRun('80–85 min / ~11 km',['FC objetivo: 140–157 bpm','Salir temprano']),cooldownLong()]},
-        {name:"Domingo",dow:6,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperación completa'])]},
-      ]},
-      { num:"Sem 6", label:"20–25 abr", km:"~26 km", wk:5, days:[
-        {name:"Lunes",dow:0,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(40),cooldown()]},
-        {name:"Martes",dow:1,type:"run",title:"Zona 2",extra:[warmup(),ligasPre(),zona2(50,'7–8'),cooldown()]},
-        {name:"Miércoles",dow:2,type:"gym",title:"Banda easy 30 min + tren inferior + core",extra:[warmup(),ligasGym(),bandaEasy(30),trenInferior(1),core(1),cooldown()]},
-        {name:"Jueves",dow:3,type:"gym",title:"Banda 40 min zona 2 + tren superior + core",extra:[warmup(),bandaEasy(40),trenSuperior(1),core(1),cooldown()]},
-        {name:"Viernes",dow:4,type:"mov",title:"Descanso activo + core",...{extra:viernesCore()}},
-        {name:"Sábado",dow:5,type:"long",title:"Long run — por FC",extra:[warmup(),longRun('90 min / ~12–13 km',['FC objetivo: 140–157 bpm','Salir temprano']),cooldownLong()]},
-        {name:"Domingo",dow:6,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperación completa'])]},
+      { num:"Sem reac", label:"5-11 jul", km:"~25 km", days:[
+        {name:"Domingo",absDay:0,type:"long",title:"Long run de reactivacion",extra:[warmup(),longRun('10-12 km suave',['FC objetivo: 140-155 bpm, no mas','Suave, sin presion de pace','Este run reemplaza los dos fondos perdidos - sin intentar compensar distancia']),cooldownLong()]},
+        {name:"Lunes",absDay:1,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(35),cooldown()]},
+        {name:"Martes",absDay:2,type:"run",title:"Zona 2",extra:[warmup(),ligasPre(),zona2(45,'6'),cooldown()]},
+        {name:"Miercoles",absDay:3,type:"gym",title:"Gym completo · tren inferior + tren superior",extra:[warmup(),ligasGym(),...gymCompleto('pico'),cooldown()]},
+        {name:"Jueves",absDay:4,type:"run",title:"Zona 2 moderada",extra:[warmup(),ligasPre(),zona2(45,'6-7'),cooldown()]},
+        {name:"Viernes",absDay:5,type:"mov",title:"Descanso activo + core",extra:viernesCore()},
+        {name:"Sabado",absDay:6,type:"long",title:"Long run · vuelta al volumen",extra:[warmup(),longRun('16-18 km',['FC objetivo: 140-158 bpm','Primer long run real post-viaje','Salir temprano, antes de 7am']),cooldownLong()]},
       ]},
     ]
   },
   {
-    name:"Fase 2", range:"27 abr – 21 jun · semanas 7–14",
-    desc:"Construcción. Lunes sigue siendo recovery la mayoría de semanas. Calidad aparece en martes o jueves (banda), pero no todas las semanas — alternando con zona 2 pura. Máximo 1 sesión de calidad por semana.",
+    name:"Pico final",
+    range:"12 jul - 2 ago · 4 semanas de carga maxima",
+    desc:"Cuatro semanas de volumen maximo antes del taper. Long runs progresivos. Una sesion de calidad por semana (martes o jueves), no todas las semanas. Lunes siempre recovery. Gym completo los miercoles sin correr ese dia. Pace de referencia para calidad: 5:10-5:25 min/km (umbral), 5:34 min/km (ritmo maraton objetivo).",
     weeks:[
-      { num:"Sem 7", label:"27 abr – 2 may", km:"~28 km", wk:6, days:[
-        {name:"Lunes",dow:0,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(40),cooldown()]},
-        {name:"Martes",dow:1,type:"run",title:"Zona 2",extra:[warmup(),ligasPre(),zona2(55,'8'),cooldown()]},
-        {name:"Miércoles",dow:2,type:"gym",title:"Banda easy 30 min + tren inferior + core",extra:[warmup(),ligasGym(),bandaEasy(30),trenInferior(2),core(2),cooldown()]},
-        {name:"Jueves",dow:3,type:"gym",title:"Banda 40 min zona 2 + tren superior + core",extra:[warmup(),bandaEasy(40),trenSuperior(2),core(2),cooldown()]},
-        {name:"Viernes",dow:4,type:"mov",title:"Descanso activo + core",...{extra:viernesCore()}},
-        {name:"Sábado",dow:5,type:"long",title:"Long run — por FC",extra:[warmup(),longRun('95 min / ~13–14 km',['FC objetivo: 140–158 bpm']),cooldownLong()]},
-        {name:"Domingo",dow:6,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperación completa'])]},
-      ]},
-      { num:"Sem 8", label:"4–9 may", km:"~30 km", wk:7, days:[
-        {name:"Lunes",dow:0,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(40),cooldown()]},
-        {name:"Martes",dow:1,type:"run",title:"Fartlek — por colinas o por sensación",extra:[
+      // Sem pico 1: 12-18 jul
+      { num:"Sem 1 pico", label:"12-18 jul", km:"~38 km", days:[
+        {name:"Lunes",absDay:7,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(40),cooldown()]},
+        {name:"Martes",absDay:8,type:"run",title:"Tempo moderado",extra:[
           warmup(),ligasPre(),
-          fartlek(['55 min total','Buscar terreno con subidas o usar referencias visuales','Subidas / esfuerzos: ritmo fuerte, cómodo-duro','Bajadas y plano: zona 2 de recuperación','No es estructurado — la variación es el objetivo','~8–9 km']),
+          tempoRun(['55 min total','10 min zona 2 calentamiento','25 min tempo sostenido: FC 160-168 bpm, pace ~5:10-5:25 min/km','10 min zona 2 vuelta a calma','Esta es la sesion clave de la semana','~9-10 km']),
           cooldown()
         ]},
-        {name:"Miércoles",dow:2,type:"gym",title:"Banda easy 30 min + tren inferior + core",extra:[warmup(),ligasGym(),bandaEasy(30),trenInferior(2),core(2),cooldown()]},
-        {name:"Jueves",dow:3,type:"gym",title:"Banda 40 min zona 2 + tren superior + core",extra:[warmup(),bandaEasy(40),trenSuperior(2),core(2),cooldown()]},
-        {name:"Viernes",dow:4,type:"mov",title:"Descanso activo + core",...{extra:viernesCore()}},
-        {name:"Sábado",dow:5,type:"long",title:"Long run — por FC",extra:[warmup(),longRun('100 min / ~14–15 km',['FC objetivo: 140–158 bpm','Salir temprano']),cooldownLong()]},
-        {name:"Domingo",dow:6,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperación completa'])]},
+        {name:"Miercoles",absDay:9,type:"gym",title:"Gym completo · tren inferior + tren superior",extra:[warmup(),ligasGym(),...gymCompleto('pico'),cooldown()]},
+        {name:"Jueves",absDay:10,type:"run",title:"Zona 2",extra:[warmup(),ligasPre(),zona2(50,'7'),cooldown()]},
+        {name:"Viernes",absDay:11,type:"mov",title:"Descanso activo + core",extra:viernesCore()},
+        {name:"Sabado",absDay:12,type:"long",title:"Long run",extra:[warmup(),longRun('20-22 km',['FC objetivo: 140-158 bpm','Practicar geles cada 45 min desde km 10']),cooldownLong()]},
+        {name:"Domingo",absDay:13,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperacion completa'])]},
       ]},
-      { num:"Sem 9", label:"11–16 may", km:"~30 km", wk:8, days:[
-        {name:"Lunes",dow:0,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(40),cooldown()]},
-        {name:"Martes",dow:1,type:"run",title:"Zona 2",extra:[warmup(),ligasPre(),zona2(55,'8'),cooldown()]},
-        {name:"Miércoles",dow:2,type:"gym",title:"Banda easy 30 min + tren inferior + core",extra:[warmup(),ligasGym(),bandaEasy(30),trenInferior(2),core(2),cooldown()]},
-        {name:"Jueves",dow:3,type:"gym",title:"Banda 40 min con fartlek suave integrado + tren superior + core",extra:[
-          warmup(),
-          fartlek(['40 min en banda','10 min zona 2','3×2 min a ritmo fuerte, recuperación 2 min zona 2','10 min zona 2 de vuelta a calma','FC en esfuerzos: máx 175 bpm']),
-          trenSuperior(2),core(2),cooldown()
-        ]},
-        {name:"Viernes",dow:4,type:"mov",title:"Descanso activo + core",...{extra:viernesCore()}},
-        {name:"Sábado",dow:5,type:"long",title:"Long run — por FC",extra:[warmup(),longRun('105 min / ~15 km',['FC objetivo: 140–158 bpm']),cooldownLong()]},
-        {name:"Domingo",dow:6,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperación completa'])]},
-      ]},
-      { num:"Sem 10", label:"18–23 may", km:"~32 km", wk:9, days:[
-        {name:"Lunes",dow:0,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(40),cooldown()]},
-        {name:"Martes",dow:1,type:"run",title:"Primer tempo del plan",extra:[
+      // Sem pico 2: 19-25 jul
+      { num:"Sem 2 pico", label:"19-25 jul", km:"~40 km", days:[
+        {name:"Lunes",absDay:14,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(40),cooldown()]},
+        {name:"Martes",absDay:15,type:"run",title:"Zona 2",extra:[warmup(),ligasPre(),zona2(55,'8'),cooldown()]},
+        {name:"Miercoles",absDay:16,type:"gym",title:"Gym completo · tren inferior + tren superior",extra:[warmup(),ligasGym(),...gymCompleto('pico'),cooldown()]},
+        {name:"Jueves",absDay:17,type:"run",title:"Fartlek variado",extra:[
           warmup(),ligasPre(),
-          tempo(['55 min total','10 min zona 2 calentamiento','20 min tempo sostenido: FC 160–168 bpm, ritmo fuerte pero controlado','10 min zona 2 vuelta a calma','~9–10 km']),
+          fartlek(['50 min total','10 min zona 2','Fartlek libre: acelera por sensacion, sin reloj','Algunos esfuerzos de 30s, otros de 1-2 min segun terreno y sensacion','10 min zona 2 de vuelta a calma','~8 km']),
           cooldown()
         ]},
-        {name:"Miércoles",dow:2,type:"gym",title:"Banda easy 30 min + tren inferior + core",extra:[warmup(),ligasGym(),bandaEasy(30),trenInferior(2),core(2),cooldown()]},
-        {name:"Jueves",dow:3,type:"gym",title:"Banda 40 min zona 2 + tren superior + core",extra:[warmup(),bandaEasy(40),trenSuperior(2),core(2),cooldown()]},
-        {name:"Viernes",dow:4,type:"mov",title:"Descanso activo + core",...{extra:viernesCore()}},
-        {name:"Sábado",dow:5,type:"long",title:"Long run — por FC",extra:[warmup(),longRun('110 min / ~15–16 km',['FC objetivo: 140–158 bpm']),cooldownLong()]},
-        {name:"Domingo",dow:6,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperación completa'])]},
+        {name:"Viernes",absDay:18,type:"mov",title:"Descanso activo + core",extra:viernesCore()},
+        {name:"Sabado",absDay:19,type:"long",title:"Long run pico",extra:[warmup(),longRun('24-26 km',['FC objetivo: 140-158 bpm','Fondo mas largo del ciclo revisado','Salir antes de 6:30am','Geles cada 45 min obligatorio']),cooldownLong()]},
+        {name:"Domingo",absDay:20,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperacion critica'])]},
       ]},
-      { num:"Sem 11", label:"25–30 may · DESCARGA", km:"~22 km", wk:10, days:[
-        {name:"Lunes",dow:0,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(35),cooldown()]},
-        {name:"Martes",dow:1,type:"run",title:"Zona 2 suave",extra:[warmup(),ligasPre(),zona2(40,'5–6'),cooldown()]},
-        {name:"Miércoles",dow:2,type:"gym",title:"Banda easy 30 min + tren inferior ligero + core",extra:[
-          warmup(),ligasGym(),bandaEasy(30),
-          blk('bl-lower','Tren inferior · 65% carga')+items(['Sentadilla goblet KB: 2×10','Hip thrust: 2×10','Bulgarian split squat KB: 2×8 c/lado']),
-          blk('bl-core','Core')+items(['Plancha: 2×50s','Dead bug: 2×10 c/lado']),
-          cooldown()
-        ]},
-        {name:"Jueves",dow:3,type:"gym",title:"Banda 40 min zona 2 + tren superior ligero + core",extra:[
-          warmup(),bandaEasy(40),
-          blk('bl-upper','Tren superior · 65% carga')+items(['Press pecho: 2×12','Curl martillo: 2×12','Press hombros: 2×12','Remo 1 brazo: 2×10 c/lado']),
-          blk('bl-core','Core')+items(['Plancha lateral: 2×30s c/lado']),
-          cooldown()
-        ]},
-        {name:"Viernes",dow:4,type:"mov",title:"Descanso activo + core",...{extra:viernesCore()}},
-        {name:"Sábado",dow:5,type:"long",title:"Long run reducido — por FC",extra:[warmup(),longRun('75 min / ~10 km',['Semana de descarga, muy suave','FC objetivo: 140–150 bpm']),cooldownLong()]},
-        {name:"Domingo",dow:6,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperación completa'])]},
-      ]},
-      { num:"Sem 12", label:"1–6 jun", km:"~32 km", wk:11, days:[
-        {name:"Lunes",dow:0,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(40),cooldown()]},
-        {name:"Martes",dow:1,type:"run",title:"Zona 2",extra:[warmup(),ligasPre(),zona2(55,'8'),cooldown()]},
-        {name:"Miércoles",dow:2,type:"gym",title:"Banda easy 30 min + tren inferior + core",extra:[warmup(),ligasGym(),bandaEasy(30),trenInferior(2),core(2),cooldown()]},
-        {name:"Jueves",dow:3,type:"gym",title:"Banda 40 min zona 2 + tren superior + core",extra:[warmup(),bandaEasy(40),trenSuperior(2),core(2),cooldown()]},
-        {name:"Viernes",dow:4,type:"mov",title:"Descanso activo + core",...{extra:viernesCore()}},
-        {name:"Sábado",dow:5,type:"long",title:"Long run — por FC",extra:[warmup(),longRun('115 min / ~16–17 km',['FC objetivo: 140–158 bpm','Salir temprano']),cooldownLong()]},
-        {name:"Domingo",dow:6,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperación completa'])]},
-      ]},
-      { num:"Sem 13", label:"8–13 jun", km:"~34 km", wk:12, days:[
-        {name:"Lunes",dow:0,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(40),cooldown()]},
-        {name:"Martes",dow:1,type:"run",title:"Fartlek — Mona Fartlek adaptado",extra:[
+      // Sem pico 3: 26 jul - 1 ago
+      { num:"Sem 3 pico", label:"26 jul - 1 ago", km:"~36 km", days:[
+        {name:"Lunes",absDay:21,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(40),cooldown()]},
+        {name:"Martes",absDay:22,type:"run",title:"Tempo en ritmo maraton",extra:[
           warmup(),ligasPre(),
-          fartlek(['55 min total','10 min zona 2','Mona Fartlek: 2×90s, 4×60s, 4×30s, 4×15s a ritmo fuerte','Recuperación trotando = mismo tiempo que el esfuerzo','10 min zona 2 vuelta a calma','FC máx en esfuerzos: 180 bpm','~9–10 km']),
+          tempoRun(['55 min total','10 min zona 2 calentamiento','25-30 min en ritmo objetivo: 5:34 min/km (ritmo maraton exacto), FC 165-172 bpm','10 min zona 2 vuelta a calma','La sesion mas especifica del plan - simulacion de pace de carrera','~10 km']),
           cooldown()
         ]},
-        {name:"Miércoles",dow:2,type:"gym",title:"Banda easy 30 min + tren inferior + core",extra:[warmup(),ligasGym(),bandaEasy(30),trenInferior(2),core(2),cooldown()]},
-        {name:"Jueves",dow:3,type:"gym",title:"Banda 40 min zona 2 + tren superior + core",extra:[warmup(),bandaEasy(40),trenSuperior(2),core(2),cooldown()]},
-        {name:"Viernes",dow:4,type:"mov",title:"Descanso activo + core",...{extra:viernesCore()}},
-        {name:"Sábado",dow:5,type:"long",title:"Long run — por FC",extra:[warmup(),longRun('120 min / ~17–18 km',['FC objetivo: 140–158 bpm','Practicar geles si los vas a usar']),cooldownLong()]},
-        {name:"Domingo",dow:6,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperación completa'])]},
-      ]},
-      { num:"Sem 14", label:"15–20 jun", km:"~34 km", wk:13, days:[
-        {name:"Lunes",dow:0,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(40),cooldown()]},
-        {name:"Martes",dow:1,type:"run",title:"Zona 2",extra:[warmup(),ligasPre(),zona2(55,'8'),cooldown()]},
-        {name:"Miércoles",dow:2,type:"gym",title:"Banda easy 30 min + tren inferior + core",extra:[warmup(),ligasGym(),bandaEasy(30),trenInferior(2),core(2),cooldown()]},
-        {name:"Jueves",dow:3,type:"gym",title:"Banda 40 min zona 2 + tren superior + core",extra:[warmup(),bandaEasy(40),trenSuperior(2),core(2),cooldown()]},
-        {name:"Viernes",dow:4,type:"mov",title:"Descanso activo + core",...{extra:viernesCore()}},
-        {name:"Sábado",dow:5,type:"long",title:"Long run — por FC",extra:[warmup(),longRun('130 min / ~19–20 km',['FC objetivo: 140–158 bpm','Estrategia de hidratación cada 20 min']),cooldownLong()]},
-        {name:"Domingo",dow:6,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperación completa'])]},
+        {name:"Miercoles",absDay:23,type:"gym",title:"Gym completo · tren inferior + tren superior",extra:[warmup(),ligasGym(),...gymCompleto('pico'),cooldown()]},
+        {name:"Jueves",absDay:24,type:"run",title:"Zona 2",extra:[warmup(),ligasPre(),zona2(45,'6-7'),cooldown()]},
+        {name:"Viernes",absDay:25,type:"mov",title:"Descanso activo + core",extra:viernesCore()},
+        {name:"Sabado",absDay:26,type:"long",title:"Long run con cierre",extra:[warmup(),longRun('20-22 km con cierre a ritmo maraton',['Primeros 15-17 km: FC 140-155 bpm, suave','Ultimos 3-5 km: acelerar a 5:34 min/km (ritmo objetivo 3:55)','Practica de como se siente el ritmo objetivo con piernas cansadas']),cooldownLong()]},
+        {name:"Domingo",absDay:27,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperacion critica'])]},
       ]},
     ]
   },
   {
-    name:"Fase 3", range:"22 jun – 2 ago · semanas 15–20",
-    desc:"Pico. Long runs de 22–32 km. Calidad aparece en martes (a veces), nunca dos semanas seguidas. Lunes sigue siendo recovery siempre. Gym pasa a mantenimiento.",
+    name:"Taper",
+    range:"2 ago - 5 sep · 5 semanas de descenso y carrera",
+    desc:"Reduccion progresiva de volumen manteniendo algo de intensidad para llegar fresco. Los primeros 10 dias son los mas importantes del taper - no compensar con mas volumen. Gym sigue los miercoles, mas ligero cada semana.",
     weeks:[
-      { num:"Sem 15", label:"22–27 jun", km:"~36 km", wk:14, days:[
-        {name:"Lunes",dow:0,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(40),cooldown()]},
-        {name:"Martes",dow:1,type:"run",title:"Zona 2",extra:[warmup(),ligasPre(),zona2(55,'8'),cooldown()]},
-        {name:"Miércoles",dow:2,type:"gym",title:"Banda easy 30 min + tren inferior mantenimiento + core",extra:[warmup(),ligasGym(),bandaEasy(30),trenInferior(3),core(2),cooldown()]},
-        {name:"Jueves",dow:3,type:"gym",title:"Banda 40 min zona 2 + tren superior mantenimiento + core",extra:[warmup(),bandaEasy(40),trenSuperior(3),core(2),cooldown()]},
-        {name:"Viernes",dow:4,type:"mov",title:"Descanso activo + core",...{extra:viernesCore()}},
-        {name:"Sábado",dow:5,type:"long",title:"Long run — por FC",extra:[warmup(),longRun('140 min / ~21–22 km',['FC objetivo: 140–158 bpm','Salir antes de 7am','Practicar estrategia completa con geles']),cooldownLong()]},
-        {name:"Domingo",dow:6,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperación crítica'])]},
-      ]},
-      { num:"Sem 16", label:"29 jun – 4 jul", km:"~38 km", wk:15, days:[
-        {name:"Lunes",dow:0,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(40),cooldown()]},
-        {name:"Martes",dow:1,type:"run",title:"Tempo moderado",extra:[
+      // Taper sem 1: 2-8 ago
+      { num:"Taper 1", label:"2-8 ago", km:"~28 km", days:[
+        {name:"Lunes",absDay:28,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(35),cooldown()]},
+        {name:"Martes",absDay:29,type:"run",title:"Zona 2",extra:[warmup(),ligasPre(),zona2(45,'6'),cooldown()]},
+        {name:"Miercoles",absDay:30,type:"gym",title:"Gym completo · mas ligero",extra:[warmup(),ligasGym(),...gymCompleto('taper'),cooldown()]},
+        {name:"Jueves",absDay:31,type:"run",title:"Zona 2 con strides al final",extra:[
           warmup(),ligasPre(),
-          tempo(['55 min total','10 min zona 2 calentamiento','25 min tempo sostenido: FC 160–168 bpm','10 min zona 2 vuelta a calma','~9–10 km']),
+          zona2(40,'5-6'),
+          blk('bl-run','Strides al final') + items(['4-5 strides de 20s a ritmo vivo al terminar la zona 2','Recuperacion caminando entre strides','Solo para mantener las piernas activas']),
           cooldown()
         ]},
-        {name:"Miércoles",dow:2,type:"gym",title:"Banda easy 30 min + tren inferior mantenimiento + core",extra:[warmup(),ligasGym(),bandaEasy(30),trenInferior(3),core(2),cooldown()]},
-        {name:"Jueves",dow:3,type:"gym",title:"Banda 40 min zona 2 + tren superior mantenimiento + core",extra:[warmup(),bandaEasy(40),trenSuperior(3),core(2),cooldown()]},
-        {name:"Viernes",dow:4,type:"mov",title:"Descanso activo + core",...{extra:viernesCore()}},
-        {name:"Sábado",dow:5,type:"long",title:"Long run — por FC",extra:[warmup(),longRun('150 min / ~23–24 km',['FC objetivo: 140–158 bpm','Salir muy temprano']),cooldownLong()]},
-        {name:"Domingo",dow:6,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperación crítica'])]},
+        {name:"Viernes",absDay:32,type:"mov",title:"Descanso activo + core",extra:viernesCore()},
+        {name:"Sabado",absDay:33,type:"long",title:"Long run reducido",extra:[warmup(),longRun('16-18 km',['FC objetivo: 140-155 bpm','Inicio del descenso de volumen']),cooldownLong()]},
+        {name:"Domingo",absDay:34,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperacion completa'])]},
       ]},
-      { num:"Sem 17", label:"6–11 jul · DESCARGA", km:"~25 km", wk:16, days:[
-        {name:"Lunes",dow:0,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(35),cooldown()]},
-        {name:"Martes",dow:1,type:"run",title:"Zona 2 suave",extra:[warmup(),ligasPre(),zona2(45,'6'),cooldown()]},
-        {name:"Miércoles",dow:2,type:"gym",title:"Banda easy 30 min + tren inferior ligero + core",extra:[
-          warmup(),ligasGym(),bandaEasy(30),
-          blk('bl-lower','Tren inferior · 65% carga')+items(['Sentadilla goblet KB: 2×10','Hip thrust: 2×10','KB swing: 2×12']),
-          blk('bl-core','Core')+items(['Plancha: 2×50s','Dead bug: 2×10 c/lado']),
-          cooldown()
-        ]},
-        {name:"Jueves",dow:3,type:"gym",title:"Banda 40 min zona 2 + tren superior ligero + core",extra:[
-          warmup(),bandaEasy(40),
-          blk('bl-upper','Tren superior · 65% carga')+items(['Press pecho: 2×12','Curl martillo: 2×12','Press hombros: 2×12','Remo 1 brazo: 2×10 c/lado']),
-          blk('bl-core','Core')+items(['Plancha lateral: 2×30s c/lado']),
-          cooldown()
-        ]},
-        {name:"Viernes",dow:4,type:"mov",title:"Descanso activo + core",...{extra:viernesCore()}},
-        {name:"Sábado",dow:5,type:"long",title:"Long run reducido — por FC",extra:[warmup(),longRun('90 min / ~13 km',['Semana de descarga, muy suave','FC objetivo: 140–150 bpm']),cooldownLong()]},
-        {name:"Domingo",dow:6,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperación completa'])]},
-      ]},
-      { num:"Sem 18", label:"13–18 jul", km:"~40 km", wk:17, days:[
-        {name:"Lunes",dow:0,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(40),cooldown()]},
-        {name:"Martes",dow:1,type:"run",title:"Zona 2",extra:[warmup(),ligasPre(),zona2(55,'8'),cooldown()]},
-        {name:"Miércoles",dow:2,type:"gym",title:"Banda easy 30 min + tren inferior mantenimiento + core",extra:[warmup(),ligasGym(),bandaEasy(30),trenInferior(3),core(2),cooldown()]},
-        {name:"Jueves",dow:3,type:"gym",title:"Banda 40 min zona 2 + tren superior mantenimiento + core",extra:[warmup(),bandaEasy(40),trenSuperior(3),core(2),cooldown()]},
-        {name:"Viernes",dow:4,type:"mov",title:"Descanso activo + core",...{extra:viernesCore()}},
-        {name:"Sábado",dow:5,type:"long",title:"Long run pico — por FC",extra:[warmup(),longRun('160 min / ~25–27 km',['FC objetivo: 140–158 bpm','Salir antes de 6:30am','Geles cada 45 min desde km 10']),cooldownLong()]},
-        {name:"Domingo",dow:6,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperación crítica'])]},
-      ]},
-      { num:"Sem 19", label:"20–25 jul", km:"~42 km", wk:18, days:[
-        {name:"Lunes",dow:0,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(40),cooldown()]},
-        {name:"Martes",dow:1,type:"run",title:"Fartlek variado",extra:[
+      // Taper sem 2: 9-15 ago
+      { num:"Taper 2", label:"9-15 ago", km:"~24 km", days:[
+        {name:"Lunes",absDay:35,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(35),cooldown()]},
+        {name:"Martes",absDay:36,type:"run",title:"Zona 2",extra:[warmup(),ligasPre(),zona2(40,'5-6'),cooldown()]},
+        {name:"Miercoles",absDay:37,type:"gym",title:"Gym completo · ligero",extra:[warmup(),ligasGym(),...gymCompleto('taper'),cooldown()]},
+        {name:"Jueves",absDay:38,type:"run",title:"Fartlek suave corto",extra:[
           warmup(),ligasPre(),
-          fartlek(['55 min total','10 min zona 2','Fartlek libre: acelerá cuando te sientas bien, recuperá cuando necesitás','Varía la duración: algunos esfuerzos de 30s, otros de 2 min, según el terreno y la sensación','10 min zona 2 de vuelta a calma','~9 km']),
+          fartlek(['40 min total','30 min zona 2','3-4 acelerones espontaneos de 20-30s por sensacion','10 min zona 2 de vuelta a calma']),
           cooldown()
         ]},
-        {name:"Miércoles",dow:2,type:"gym",title:"Banda easy 30 min + tren inferior mantenimiento + core",extra:[warmup(),ligasGym(),bandaEasy(30),trenInferior(3),core(2),cooldown()]},
-        {name:"Jueves",dow:3,type:"gym",title:"Banda 40 min zona 2 + tren superior mantenimiento + core",extra:[warmup(),bandaEasy(40),trenSuperior(3),core(2),cooldown()]},
-        {name:"Viernes",dow:4,type:"mov",title:"Descanso activo + core",...{extra:viernesCore()}},
-        {name:"Sábado",dow:5,type:"long",title:"Long run pico máximo — por FC",extra:[warmup(),longRun('170–180 min / ~28–32 km',['El long run más largo del plan','FC objetivo: 140–158 bpm','Salir antes de 6am','Máxima atención a hidratación y geles']),cooldownLong()]},
-        {name:"Domingo",dow:6,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperación crítica'])]},
+        {name:"Viernes",absDay:39,type:"mov",title:"Descanso activo + core",extra:viernesCore()},
+        {name:"Sabado",absDay:40,type:"long",title:"Long run reducido",extra:[warmup(),longRun('13-15 km',['FC objetivo: 140-152 bpm','Tranquilo y sin presion']),cooldownLong()]},
+        {name:"Domingo",absDay:41,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperacion completa'])]},
       ]},
-      { num:"Sem 20", label:"27 jul – 1 ago", km:"~36 km", wk:19, days:[
-        {name:"Lunes",dow:0,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(40),cooldown()]},
-        {name:"Martes",dow:1,type:"run",title:"Zona 2",extra:[warmup(),ligasPre(),zona2(55,'8'),cooldown()]},
-        {name:"Miércoles",dow:2,type:"gym",title:"Banda easy 30 min + tren inferior mantenimiento + core",extra:[warmup(),ligasGym(),bandaEasy(30),trenInferior(3),core(2),cooldown()]},
-        {name:"Jueves",dow:3,type:"gym",title:"Banda 40 min zona 2 + tren superior mantenimiento + core",extra:[warmup(),bandaEasy(40),trenSuperior(3),core(2),cooldown()]},
-        {name:"Viernes",dow:4,type:"mov",title:"Descanso activo + core",...{extra:viernesCore()}},
-        {name:"Sábado",dow:5,type:"long",title:"Long run pre-taper — por FC",extra:[warmup(),longRun('140 min / ~22–24 km',['FC objetivo: 140–158 bpm','Inicio del descenso de volumen']),cooldownLong()]},
-        {name:"Domingo",dow:6,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperación crítica'])]},
-      ]},
-    ]
-  },
-  {
-    name:"Fase 4", range:"3 ago – 5 sep · semanas 21–25",
-    desc:"Taper. Reducir volumen progresivamente. Lunes = recovery siempre. Solo una sesión con strides de activación la última semana. Llegar fresco y confiado.",
-    weeks:[
-      { num:"Sem 21", label:"3–8 ago", km:"~30 km", wk:20, days:[
-        {name:"Lunes",dow:0,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(40),cooldown()]},
-        {name:"Martes",dow:1,type:"run",title:"Zona 2",extra:[warmup(),ligasPre(),zona2(50,'7'),cooldown()]},
-        {name:"Miércoles",dow:2,type:"gym",title:"Banda easy 30 min + tren inferior mantenimiento + core",extra:[warmup(),ligasGym(),bandaEasy(30),trenInferior(3),core(2),cooldown()]},
-        {name:"Jueves",dow:3,type:"gym",title:"Banda 40 min zona 2 + tren superior mantenimiento + core",extra:[warmup(),bandaEasy(40),trenSuperior(3),core(2),cooldown()]},
-        {name:"Viernes",dow:4,type:"mov",title:"Descanso activo + core",...{extra:viernesCore()}},
-        {name:"Sábado",dow:5,type:"long",title:"Long run reducido — por FC",extra:[warmup(),longRun('110 min / ~16–17 km',['FC objetivo: 140–155 bpm']),cooldownLong()]},
-        {name:"Domingo",dow:6,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperación completa'])]},
-      ]},
-      { num:"Sem 22", label:"10–15 ago", km:"~26 km", wk:21, days:[
-        {name:"Lunes",dow:0,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(35),cooldown()]},
-        {name:"Martes",dow:1,type:"run",title:"Zona 2",extra:[warmup(),ligasPre(),zona2(45,'6–7'),cooldown()]},
-        {name:"Miércoles",dow:2,type:"gym",title:"Banda easy 30 min + tren inferior mantenimiento + core",extra:[warmup(),ligasGym(),bandaEasy(30),trenInferior(3),core(2),cooldown()]},
-        {name:"Jueves",dow:3,type:"gym",title:"Banda 40 min zona 2 + tren superior mantenimiento + core",extra:[warmup(),bandaEasy(40),trenSuperior(3),core(2),cooldown()]},
-        {name:"Viernes",dow:4,type:"mov",title:"Descanso activo + core",...{extra:viernesCore()}},
-        {name:"Sábado",dow:5,type:"long",title:"Long run reducido — por FC",extra:[warmup(),longRun('90 min / ~13 km',['FC objetivo: 140–152 bpm']),cooldownLong()]},
-        {name:"Domingo",dow:6,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperación completa'])]},
-      ]},
-      { num:"Sem 23", label:"17–22 ago", km:"~20 km", wk:22, days:[
-        {name:"Lunes",dow:0,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(35),cooldown()]},
-        {name:"Martes",dow:1,type:"run",title:"Zona 2 suave",extra:[warmup(),ligasPre(),zona2(40,'5–6'),cooldown()]},
-        {name:"Miércoles",dow:2,type:"gym",title:"Banda easy 30 min + tren inferior ligero + core",extra:[
-          warmup(),ligasGym(),bandaEasy(30),
-          blk('bl-lower','Tren inferior · ligero')+items(['Sentadilla goblet KB: 2×10','Hip thrust: 2×10','Bulgarian split squat KB: 2×8 c/lado']),
-          blk('bl-core','Core')+items(['Plancha: 2×50s','Dead bug: 2×10 c/lado']),
+      // Taper sem 3: 16-22 ago
+      { num:"Taper 3", label:"16-22 ago", km:"~18 km", days:[
+        {name:"Lunes",absDay:42,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recovery(30),cooldown()]},
+        {name:"Martes",absDay:43,type:"run",title:"Zona 2 suave",extra:[warmup(),ligasPre(),zona2(35,'4-5'),cooldown()]},
+        {name:"Miercoles",absDay:44,type:"gym",title:"Gym muy ligero",extra:[
+          warmup(),ligasGym(),
+          blk('bl-lower','Tren inferior · minimo')+items(['Sentadilla goblet KB: 2x8','Hip thrust: 2x10']),
+          blk('bl-upper','Tren superior · minimo')+items(['Press pecho: 2x10','Press hombros: 2x10','Remo 1 brazo: 2x8 c/lado']),
+          blk('bl-core','Core')+items(['Plancha: 2x45s','Dead bug: 2x10 c/lado']),
           cooldown()
         ]},
-        {name:"Jueves",dow:3,type:"gym",title:"Banda 40 min zona 2 + tren superior ligero + core",extra:[
-          warmup(),bandaEasy(40),
-          blk('bl-upper','Tren superior · ligero')+items(['Press pecho: 2×12','Curl martillo: 2×12','Press hombros: 2×12','Face pull liga: 2×15']),
-          blk('bl-core','Core')+items(['Plancha lateral: 2×30s c/lado']),
-          cooldown()
-        ]},
-        {name:"Viernes",dow:4,type:"mov",title:"Descanso activo + core",...{extra:viernesCore()}},
-        {name:"Sábado",dow:5,type:"long",title:"Long run taper — por FC",extra:[warmup(),longRun('75 min / ~10–11 km',['FC objetivo: 140–150 bpm','Tranquilo y sin presión']),cooldownLong()]},
-        {name:"Domingo",dow:6,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperación completa'])]},
-      ]},
-      { num:"Sem 24", label:"24–30 ago · pre-carrera", km:"~14 km", wk:23, days:[
-        {name:"Lunes",dow:0,type:"run",title:"Recovery run muy suave",extra:[warmup(),ligasPre(),recovery(30),cooldown()]},
-        {name:"Martes",dow:1,type:"run",title:"Zona 2 corta con strides",extra:[
+        {name:"Jueves",absDay:45,type:"run",title:"Zona 2 con strides",extra:[
           warmup(),ligasPre(),
-          blk('bl-run','Activación · 35 min') + items(['30 min zona 1–2 muy tranquilo','Al final: 4–5 strides de 15–20s a ritmo vivo','Recuperación completa caminando entre strides','Solo para mantener las piernas activas']),
+          zona2(35,'4-5'),
+          blk('bl-run','Strides') + items(['4 strides de 15-20s a ritmo vivo','Recuperacion caminando entre strides']),
           cooldown()
         ]},
-        {name:"Miércoles",dow:2,type:"gym",title:"Banda easy 30 min + activación mínima",extra:[
-          warmup(),ligasGym(),bandaEasy(30),
-          blk('bl-liga','Solo ligas · sin carga alguna')+items(['Activación glúteo suave: 2×12 c/ejercicio','Sin pesas esta semana']),
+        {name:"Viernes",absDay:46,type:"mov",title:"Descanso activo + core",extra:viernesCore()},
+        {name:"Sabado",absDay:47,type:"long",title:"Long run taper",extra:[warmup(),longRun('10-12 km',['FC objetivo: 140-150 bpm','Muy tranquilo']),cooldownLong()]},
+        {name:"Domingo",absDay:48,type:"rest",title:"Descanso total",extra:[blk('bl-cool','Descanso')+items(['Recuperacion completa'])]},
+      ]},
+      // Taper sem 4: 23-29 ago (semana pre-carrera)
+      { num:"Taper 4", label:"23-29 ago · pre-carrera", km:"~12 km", days:[
+        {name:"Lunes",absDay:49,type:"run",title:"Recovery run muy suave",extra:[warmup(),ligasPre(),recovery(30),cooldown()]},
+        {name:"Martes",absDay:50,type:"run",title:"Zona 2 corta con strides",extra:[
+          warmup(),ligasPre(),
+          blk('bl-run','Activacion · 30 min') + items(['25 min zona 1-2 muy tranquilo','4-5 strides de 15s a ritmo vivo al final','Recuperacion caminando entre strides']),
           cooldown()
         ]},
-        {name:"Jueves",dow:3,type:"run",title:"Rodaje de activación muy suave",extra:[
+        {name:"Miercoles",absDay:51,type:"gym",title:"Solo ligas y movilidad · sin pesas",extra:[
+          warmup(),ligasGym(),
+          blk('bl-liga','Activacion minima')+items(['Solo ligas - sin pesas esta semana','Activacion gluteo suave: 2x12 c/ejercicio']),
+          cooldown()
+        ]},
+        {name:"Jueves",absDay:52,type:"run",title:"Rodaje de activacion",extra:[
           warmup(),
-          blk('bl-run','Activación · 20 min')+items(['20 min zona 1 muy suave','3 strides de 15s al final','El objetivo es llegar fresco al sábado']),
+          blk('bl-run','Activacion · 20 min')+items(['20 min zona 1 muy suave','3 strides de 15s al final','El objetivo es llegar fresco al sabado']),
           cooldown()
         ]},
-        {name:"Viernes",dow:4,type:"mov",title:"Descanso total — preparación",extra:[
-          blk('bl-cool','Descanso y preparación')+items(['Estiramientos pasivos suaves: 15 min','Hidratación consciente todo el día','Preparar kit de carrera completo','Comer bien, dormir temprano'])
+        {name:"Viernes",absDay:53,type:"mov",title:"Descanso total · preparacion",extra:[
+          blk('bl-cool','Descanso y preparacion')+items(['Estiramientos pasivos suaves: 15 min','Hidratacion consciente todo el dia','Preparar kit de carrera completo','Comer bien, dormir temprano'])
         ]},
-        {name:"Sábado",dow:5,type:"long",title:"MARATÓN — 5 de septiembre 2026",extra:[
-          blk('bl-run','42.195 km — Día de carrera')+items(['Salir cómodo en los primeros 21 km: FC 155–165 bpm','Segunda mitad: dar más si el cuerpo lo permite','Geles cada 40–45 min desde km 15','Hidratación en cada estación','Confiar en las 25 semanas de trabajo']),
-          blk('bl-cool','Post carrera')+items(['Hidratación inmediata','Seguir video deep stretching del tab Movilidad','Celebración merecida 🎉'])
+        {name:"Sabado 5 sep",absDay:62,type:"long",title:"MARATON · 5 de septiembre 2026",extra:[
+          blk('bl-run','42.195 km · objetivo 3:55 (pace 5:34 min/km)') + items([
+            'Primeros 5 km: un poco mas suave que el pace objetivo, 5:40-5:45 min/km',
+            'Km 5-30: ritmo objetivo 5:34 min/km, mantenido y constante',
+            'Km 30-42: dar todo lo que queda, ritmo negativo si el cuerpo responde',
+            'Geles cada 40 min desde km 12',
+            'Hidratacion en cada estacion',
+            'Confiar en el trabajo hecho'
+          ]),
+          blk('bl-cool','Post carrera')+items(['Hidratacion inmediata','Deep stretching del tab Movilidad','Celebracion merecida'])
         ]},
-        {name:"Domingo",dow:6,type:"rest",title:"Descanso y celebración",extra:[blk('bl-cool','Descanso')+items(['Recuperación completa','Te lo ganaste'])]},
+        {name:"Domingo 6 sep",absDay:63,type:"rest",title:"Descanso y celebracion",extra:[blk('bl-cool','Descanso')+items(['Recuperacion completa','Te lo ganaste'])]},
       ]},
     ]
   }
@@ -841,7 +633,7 @@ function showPhase(idx) {
 
 function renderPhase() {
   const p = PHASES[activePhase];
-  let html = `<div class="phase-desc"><span class="phase-range">${p.range}</span> — ${p.desc}</div>`;
+  let html = `<div class="phase-desc"><span class="phase-range">${p.range}</span> - ${p.desc}</div>`;
   p.weeks.forEach((w, wi) => {
     const id = `w${activePhase}-${wi}`;
     const miniDots = (w.days||[]).map(d => `<div class="mini-day" style="background:${colors[d.type]||colors.rest}"></div>`).join('');
@@ -852,13 +644,13 @@ function renderPhase() {
           <span class="week-label">${w.label}</span>
           ${w.km ? `<span class="week-km">${w.km}</span>` : ''}
           <div class="week-mini">${miniDots}</div>
-          <span class="chevron" id="chev-${id}">▼</span>
+          <span class="chevron" id="chev-${id}">v</span>
         </div>
         <div class="week-body" id="${id}">
           <div class="struct-note">${STRUCT}</div>
           <div class="days">
             ${(w.days||[]).map(d => {
-              const dateStr = getDate(w.wk, d.dow);
+              const dateStr = getDate(d.absDay);
               return `
               <div class="day-card ${d.type}">
                 <div class="day-name">${d.name}</div>
