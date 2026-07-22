@@ -360,7 +360,29 @@ const EXO_VIDEOS = {
   seatedrow: 'xQNrFHEMhI4',
   shoulderpress: 'BAZkFGeUy5U',
   bicepcurl: 'FkrWq69RFSc',
-  tricepdown: 'WOOrjznveFI'
+  tricepdown: 'WOOrjznveFI',
+  plank: 'mwlp75MS6Rg',
+  deadbug: 'bxn9FBrt4-A',
+  birddog: 'ZdAHe9_HeEw',
+  sideplank: '44ND4bOB-T0',
+  pallof: 'Y0e2w0aKOXw',
+  clamshell: 'ymjOGuPjOSE',
+  monsterwalk: 'hE4UsbLMjC8',
+  donkeykick: 'DtSfBsdIlJo',
+  firehydrant: 'DtSfBsdIlJo',
+  standingabd: '2Q33-har6JQ',
+  paloma: '46phRH_09yM',
+  hipflexorlunge: 'Q4Ko275cluo',
+  isquiotumbado: 'Il1L75v6gq0',
+  pantorrillapared: 'D8UIL5bsm7w',
+  figura4: 'eGqbnFII3J8',
+  rotacionespinal: 'mNdJti7ZwKI',
+  worldsgreatest: 'T6j7BpxeqqU',
+  hip9090: 'nWBKgtVjIjE',
+  ninoextendido: 'gBeo_VW37q8',
+  foamroller: 'g41mPES94tc',
+  hipcircleslegswings: 'QH0SRdCGXHU',
+  deepsquat: '0wzrgyAurT8'
 };
 const EXO_NAMES = {
   legpress: 'Prensa de piernas (leg press)',
@@ -373,12 +395,35 @@ const EXO_NAMES = {
   seatedrow: 'Remo sentado en maquina',
   shoulderpress: 'Press de hombros en maquina',
   bicepcurl: 'Biceps en maquina sentado',
-  tricepdown: 'Triceps en polea / maquina'
+  tricepdown: 'Triceps en polea / maquina',
+  plank: 'Plancha frontal',
+  deadbug: 'Dead bug',
+  birddog: 'Bird-dog',
+  sideplank: 'Plancha lateral',
+  pallof: 'Pallof press con liga',
+  clamshell: 'Clamshell con liga',
+  monsterwalk: 'Monster walk lateral',
+  donkeykick: 'Donkey kick con liga',
+  firehydrant: 'Fire hydrant',
+  standingabd: 'Abduccion lateral parado',
+  paloma: 'Paloma (pigeon pose)',
+  hipflexorlunge: 'Hip flexor en estocada',
+  isquiotumbado: 'Isquio tumbado',
+  pantorrillapared: 'Pantorrilla en pared',
+  figura4: 'Figura 4 tumbado',
+  rotacionespinal: 'Rotacion espinal supina',
+  worldsgreatest: "World's greatest stretch",
+  hip9090: 'Hip 90/90',
+  ninoextendido: 'Nino extendido',
+  foamroller: 'Foam roller cuadriceps / IT band / pantorrilla',
+  hipcircleslegswings: 'Rotaciones de cadera y leg swings',
+  deepsquat: 'Sentadilla profunda con pausa'
 };
 
 function machineList(entries) {
   return `<ul class="day-items exo-list">${entries.map(([label,key]) =>
-    `<li onclick="event.stopPropagation(); openExo('${key}')">${label} <span class="exo-play">&#9654; video</span></li>`
+    key ? `<li onclick="event.stopPropagation(); openExo('${key}')">${label} <span class="exo-play">&#9654; video</span></li>`
+        : `<li>${label}</li>`
   ).join('')}</ul>`;
 }
 
@@ -400,51 +445,54 @@ function closeDayModal() {
 }
 
 function warmup() {
-  return blk('bl-warm','Calentamiento - 8 min') + items([
-    'Trote suave: 3 min',
-    'Rotaciones de cadera: 10 reps c/lado',
-    'Leg swings adelante/atras y lateral: 10 reps c/lado',
-    'Sentadilla profunda con pausa: 5 reps',
-    "World's greatest stretch: 3 reps c/lado"
+  return blk('bl-warm','Calentamiento - 8 min (toca para ver videos)') + machineList([
+    ['Trote suave: 3 min', null],
+    ['Rotaciones de cadera: 10 reps c/lado', 'hipcircleslegswings'],
+    ['Leg swings adelante/atras y lateral: 10 reps c/lado', 'hipcircleslegswings'],
+    ['Sentadilla profunda con pausa: 5 reps', 'deepsquat'],
+    ["World's greatest stretch: 3 reps c/lado", 'worldsgreatest']
   ]);
 }
 
 function cooldown() {
-  return blk('bl-cool','Estiramiento post - 10 min') + items([
-    'Paloma: 45s c/lado',
-    'Hip flexor en estocada: 45s c/lado',
-    'Isquio tumbado: 45s c/lado',
-    'Pantorrilla en pared: 45s c/lado',
-    'Figura 4 tumbado: 45s c/lado',
-    'Rotacion espinal supina: 8 reps c/lado'
+  return blk('bl-cool','Estiramiento post - 10 min (toca para ver videos)') + machineList([
+    ['Paloma: 45s c/lado', 'paloma'],
+    ['Hip flexor en estocada: 45s c/lado', 'hipflexorlunge'],
+    ['Isquio tumbado: 45s c/lado', 'isquiotumbado'],
+    ['Pantorrilla en pared: 45s c/lado', 'pantorrillapared'],
+    ['Figura 4 tumbado: 45s c/lado', 'figura4'],
+    ['Rotacion espinal supina: 8 reps c/lado', 'rotacionespinal']
   ]);
 }
 
 function cooldownLong() {
-  return blk('bl-cool','Deep stretching - 20-25 min') + items([
-    'Seguir video de deep stretching del tab Movilidad (obligatorio)',
-    'Foam roller cuadriceps + IT band + pantorrilla: 90s c/lado',
-    'Paloma: 90s c/lado - Hip 90/90: 90s c/lado',
-    'Hip flexor profundo: 60s c/lado - Isquio tumbado: 60s c/lado',
-    'Figura 4: 60s c/lado - Nino extendido: 60s',
-    'Rotacion espinal supina: 10 reps c/lado'
+  return blk('bl-cool','Deep stretching - 20-25 min (toca para ver videos)') + machineList([
+    ['Seguir video de deep stretching del tab Movilidad (obligatorio)', null],
+    ['Foam roller cuadriceps + IT band + pantorrilla: 90s c/lado', 'foamroller'],
+    ['Paloma: 90s c/lado', 'paloma'],
+    ['Hip 90/90: 90s c/lado', 'hip9090'],
+    ['Hip flexor profundo: 60s c/lado', 'hipflexorlunge'],
+    ['Isquio tumbado: 60s c/lado', 'isquiotumbado'],
+    ['Figura 4: 60s c/lado', 'figura4'],
+    ['Nino extendido: 60s', 'ninoextendido'],
+    ['Rotacion espinal supina: 10 reps c/lado', 'rotacionespinal']
   ]);
 }
 
 function ligasPre() {
-  return blk('bl-liga','Activacion ligas - pre-carrera - 8 min') + items([
-    'Clamshell con liga: 2x15 c/lado',
-    'Monster walk lateral: 2x15 pasos c/lado',
-    'Abduccion lateral parado: 2x15 c/lado',
-    'Donkey kick con liga: 2x12 c/lado'
+  return blk('bl-liga','Activacion ligas - pre-carrera - 8 min (toca para ver videos)') + machineList([
+    ['Clamshell con liga: 2x15 c/lado', 'clamshell'],
+    ['Monster walk lateral: 2x15 pasos c/lado', 'monsterwalk'],
+    ['Abduccion lateral parado: 2x15 c/lado', 'standingabd'],
+    ['Donkey kick con liga: 2x12 c/lado', 'donkeykick']
   ]);
 }
 
 function ligasGym() {
-  return blk('bl-liga','Activacion ligas - pre-gym - 5 min') + items([
-    'Clamshell: 2x15 c/lado',
-    'Fire hydrant: 2x12 c/lado',
-    'Monster walk lateral: 2x15 pasos c/lado'
+  return blk('bl-liga','Activacion ligas - pre-gym - 5 min (toca para ver videos)') + machineList([
+    ['Clamshell: 2x15 c/lado', 'clamshell'],
+    ['Fire hydrant: 2x12 c/lado', 'firehydrant'],
+    ['Monster walk lateral: 2x15 pasos c/lado', 'monsterwalk']
   ]);
 }
 
@@ -529,19 +577,19 @@ function longRunConCierre(dist, notas) {
 
 function sabadoActivo(extra) {
   const base = [
-    blk('bl-cool','Movilidad activa - 20 min') + items([
-      'Foam roller pierna completa: 15 min',
-      'Hip 90/90: 60s c/lado',
-      'Paloma: 45s c/lado',
-      'Pantorrilla en pared: 45s c/lado',
-      'Rotacion espinal supina: 10 reps c/lado'
+    blk('bl-cool','Movilidad activa - 20 min (toca para ver videos)') + machineList([
+      ['Foam roller pierna completa: 15 min', 'foamroller'],
+      ['Hip 90/90: 60s c/lado', 'hip9090'],
+      ['Paloma: 45s c/lado', 'paloma'],
+      ['Pantorrilla en pared: 45s c/lado', 'pantorrillapared'],
+      ['Rotacion espinal supina: 10 reps c/lado', 'rotacionespinal']
     ]),
-    blk('bl-core','Core') + items([
-      'Plancha frontal: 3x50s',
-      'Dead bug: 3x12 c/lado',
-      'Bird-dog: 3x10 c/lado',
-      'Plancha lateral: 3x35s c/lado',
-      'Pallof press con liga: 3x12 c/lado'
+    blk('bl-core','Core (toca para ver videos)') + machineList([
+      ['Plancha frontal: 3x50s', 'plank'],
+      ['Dead bug: 3x12 c/lado', 'deadbug'],
+      ['Bird-dog: 3x10 c/lado', 'birddog'],
+      ['Plancha lateral: 3x35s c/lado', 'sideplank'],
+      ['Pallof press con liga: 3x12 c/lado', 'pallof']
     ])
   ];
   return extra ? base.concat(extra) : base;
@@ -580,10 +628,10 @@ function gymUpperMaquinas(nivel) {
 
 function coreGym(nivel) {
   const sets = nivel === 'full' ? '3' : '2';
-  return blk('bl-core','Core') + items([
-    `Plancha frontal: ${sets}x50s`,
-    `Dead bug: ${sets}x12 c/lado`,
-    `Pallof press con liga: ${sets}x12 c/lado`
+  return blk('bl-core','Core (toca para ver videos)') + machineList([
+    [`Plancha frontal: ${sets}x50s`, 'plank'],
+    [`Dead bug: ${sets}x12 c/lado`, 'deadbug'],
+    [`Pallof press con liga: ${sets}x12 c/lado`, 'pallof']
   ]);
 }
 
