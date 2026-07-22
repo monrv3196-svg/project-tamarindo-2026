@@ -130,6 +130,28 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ar
 }
 .divider { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
 .footer { margin-top: 3rem; text-align: center; font-size: 12px; color: var(--text3); }
+
+.day-card { cursor: pointer; transition: box-shadow .15s, transform .1s; }
+.day-card:hover { box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+.day-card:active { transform: scale(0.99); }
+.day-hint { font-size: 10px; color: var(--text3); margin-top: 10px; text-align: right; }
+
+.exo-list li { cursor: pointer; }
+.exo-list li:hover { color: var(--purple); }
+.exo-play { color: var(--purple); font-size: 10px; margin-left: 6px; font-weight: 600; white-space: nowrap; }
+
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 1000; align-items: flex-start; justify-content: center; padding: 24px 12px; overflow-y: auto; }
+.modal-overlay.open { display: flex; }
+.modal-panel { background: var(--bg); border: 1px solid var(--border2); border-radius: 14px; max-width: 540px; width: 100%; padding: 22px 18px; position: relative; margin: 10px 0 30px; }
+.modal-close { position: absolute; top: 10px; right: 12px; font-size: 22px; line-height: 1; cursor: pointer; color: var(--text2); background: none; border: none; padding: 6px; }
+#dayModalBody .day-name { font-size: 12px; }
+#dayModalBody .day-date { font-size: 13px; }
+#dayModalBody .day-title { font-size: 17px; margin-bottom: 12px; }
+#dayModalBody .day-hint { display: none; }
+#exoModal .modal-panel { max-width: 480px; }
+.exo-embed { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 10px; overflow: hidden; background: var(--bg3); margin-top: 10px; }
+.exo-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+.exo-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; margin-right: 24px; }
 </style>
 </head>
 <body>
@@ -295,6 +317,21 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ar
   <div class="footer">Project Tamarindo 2026 - Maraton 5 de septiembre 2026 - objetivo sub 4:15</div>
 </div>
 
+<div class="modal-overlay" id="dayModal" onclick="if(event.target===this) closeDayModal()">
+  <div class="modal-panel">
+    <button class="modal-close" onclick="closeDayModal()">&times;</button>
+    <div id="dayModalBody"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="exoModal" onclick="if(event.target===this) closeExo()">
+  <div class="modal-panel">
+    <button class="modal-close" onclick="closeExo()">&times;</button>
+    <div class="exo-title" id="exoTitle"></div>
+    <div class="exo-embed"><iframe id="exoFrame" src="" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+</div>
+
 <script>
 const STRUCT = "Lun: descanso total - Mar: recovery run - Mie: gym tren inferior (maquinas) + caminadora recuperacion (max 35 min) - Jue: gym tren superior (maquinas) + caminadora recuperacion (max 35 min) - Vie: calidad de la semana (tempo/intervalos) - Sab: descanso activo + movilidad/core - Dom: long run por FC";
 const colors = { run:'#3B8BD4', gym:'#1D9E75', long:'#BA7517', mov:'#D4537E', rest:'#888780', event:'#8B5CF6' };
@@ -311,6 +348,56 @@ function getDate(absDay) {
 
 function blk(cls, label) { return `<div class="block-label ${cls}">${label}</div>`; }
 function items(arr) { return `<ul class="day-items">${arr.map(i=>`<li>${i}</li>`).join('')}</ul>`; }
+
+const EXO_VIDEOS = {
+  legpress: 'PB7648cGfyc',
+  legext: '8Jqof7z3QYM',
+  legcurl: 'fK0uZ3KRZRI',
+  hipadab: '2zqXU95SSqM',
+  calfraise: 'nqvJ_ATDx8k',
+  chestpress: 'CIykDiF4sfg',
+  latpulldown: 'AOpi-p0cJkc',
+  seatedrow: 'xQNrFHEMhI4',
+  shoulderpress: 'BAZkFGeUy5U',
+  bicepcurl: 'FkrWq69RFSc',
+  tricepdown: 'WOOrjznveFI'
+};
+const EXO_NAMES = {
+  legpress: 'Prensa de piernas (leg press)',
+  legext: 'Extension de cuadriceps sentado',
+  legcurl: 'Curl femoral sentado',
+  hipadab: 'Aductor / abductor de cadera en maquina',
+  calfraise: 'Elevacion de talones sentado',
+  chestpress: 'Press de pecho en maquina',
+  latpulldown: 'Jalon al pecho (lat pulldown)',
+  seatedrow: 'Remo sentado en maquina',
+  shoulderpress: 'Press de hombros en maquina',
+  bicepcurl: 'Biceps en maquina sentado',
+  tricepdown: 'Triceps en polea / maquina'
+};
+
+function machineList(entries) {
+  return `<ul class="day-items exo-list">${entries.map(([label,key]) =>
+    `<li onclick="event.stopPropagation(); openExo('${key}')">${label} <span class="exo-play">&#9654; video</span></li>`
+  ).join('')}</ul>`;
+}
+
+function openExo(key) {
+  document.getElementById('exoTitle').textContent = EXO_NAMES[key] || 'Ejercicio';
+  document.getElementById('exoFrame').src = `https://www.youtube.com/embed/${EXO_VIDEOS[key]}`;
+  document.getElementById('exoModal').classList.add('open');
+}
+function closeExo() {
+  document.getElementById('exoModal').classList.remove('open');
+  document.getElementById('exoFrame').src = '';
+}
+function openDayModal(el) {
+  document.getElementById('dayModalBody').innerHTML = el.innerHTML;
+  document.getElementById('dayModal').classList.add('open');
+}
+function closeDayModal() {
+  document.getElementById('dayModal').classList.remove('open');
+}
 
 function warmup() {
   return blk('bl-warm','Calentamiento - 8 min') + items([
@@ -463,29 +550,31 @@ function sabadoActivo(extra) {
 function gymLowerMaquinas(nivel) {
   const sets = nivel === 'full' ? '3x12' : '2x10';
   return [
-    blk('bl-lower', `Tren inferior - maquinas (sentado/acostado)`) + items([
-      `Prensa de piernas (leg press): ${sets}`,
-      `Extension de cuadriceps sentado: ${sets}`,
-      `Curl femoral sentado o acostado: ${sets}`,
-      `Aductor/abductor de cadera en maquina: ${sets} c/lado del movimiento`,
-      `Elevacion de talones sentado en maquina: ${sets}`,
-      '(Si hay maquina de gluteo/hip thrust disponible, sustituir un ejercicio por esa)'
-    ])
+    blk('bl-lower', 'Tren inferior - maquinas (toca un ejercicio para ver el video)') +
+    machineList([
+      [`Prensa de piernas (leg press): ${sets}`, 'legpress'],
+      [`Extension de cuadriceps sentado: ${sets}`, 'legext'],
+      [`Curl femoral sentado o acostado: ${sets}`, 'legcurl'],
+      [`Aductor/abductor de cadera en maquina: ${sets} c/lado del movimiento`, 'hipadab'],
+      [`Elevacion de talones sentado en maquina: ${sets}`, 'calfraise']
+    ]) +
+    '<div class="struct-note">Si hay maquina de gluteo/hip thrust disponible, sustituir un ejercicio por esa</div>'
   ];
 }
 
 function gymUpperMaquinas(nivel) {
   const sets = nivel === 'full' ? '3x12' : '2x10';
   return [
-    blk('bl-upper', `Tren superior - maquinas (sentado)`) + items([
-      `Press de pecho en maquina sentado: ${sets}`,
-      `Jalon al pecho (lat pulldown): ${sets}`,
-      `Remo sentado en maquina o polea: ${sets}`,
-      `Press de hombros en maquina sentado: ${sets}`,
-      `Maquina o polea de biceps sentado: ${sets}`,
-      `Maquina o polea de triceps sentado: ${sets}`,
-      '(cargas moderadas - no buscar hipertrofia, es mantenimiento)'
-    ])
+    blk('bl-upper', 'Tren superior - maquinas (toca un ejercicio para ver el video)') +
+    machineList([
+      [`Press de pecho en maquina sentado: ${sets}`, 'chestpress'],
+      [`Jalon al pecho (lat pulldown): ${sets}`, 'latpulldown'],
+      [`Remo sentado en maquina o polea: ${sets}`, 'seatedrow'],
+      [`Press de hombros en maquina sentado: ${sets}`, 'shoulderpress'],
+      [`Maquina o polea de biceps sentado: ${sets}`, 'bicepcurl'],
+      [`Maquina o polea de triceps sentado: ${sets}`, 'tricepdown']
+    ]) +
+    '<div class="struct-note">Cargas moderadas - no buscar hipertrofia, es mantenimiento</div>'
   ];
 }
 
@@ -609,14 +698,14 @@ const PHASES = [
         ]},
         {name:"Miercoles",absDay:37,type:"gym",title:"Gym muy ligero + caminadora corta",extra:[
           warmup(),ligasGym(),
-          blk('bl-lower','Tren inferior - minimo')+items(['Prensa de piernas: 2x10','Curl femoral sentado: 2x10']),
+          blk('bl-lower','Tren inferior - minimo (toca para ver el video)')+machineList([['Prensa de piernas: 2x10','legpress'],['Curl femoral sentado: 2x10','legcurl']]),
           coreGym('taper'),
           treadmillRun(20,'Zona 1 muy suave'),
           cooldown()
         ]},
         {name:"Jueves",absDay:38,type:"gym",title:"Gym muy ligero + caminadora corta",extra:[
           warmup(),ligasGym(),
-          blk('bl-upper','Tren superior - minimo')+items(['Press de pecho en maquina: 2x10','Jalon al pecho: 2x10']),
+          blk('bl-upper','Tren superior - minimo (toca para ver el video)')+machineList([['Press de pecho en maquina: 2x10','chestpress'],['Jalon al pecho: 2x10','latpulldown']]),
           coreGym('taper'),
           treadmillRun(20,'Zona 1 muy suave'),
           cooldown()
@@ -720,11 +809,12 @@ function renderPhase() {
             ${(w.days||[]).map(d => {
               const dateStr = getDate(d.absDay);
               return `
-              <div class="day-card ${d.type}">
+              <div class="day-card ${d.type}" onclick="openDayModal(this)">
                 <div class="day-name">${d.name}</div>
                 <div class="day-date">${dateStr}</div>
                 <div class="day-title">${d.title}</div>
                 ${(d.extra||[]).join('')}
+                <div class="day-hint">Toca para ver completo &#8599;</div>
               </div>`;
             }).join('')}
           </div>
