@@ -152,7 +152,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ar
       Objetivo sub 4:15 - pace de carrera: <span>~6:02 min/km</span> - Zona 2: <span>145-160 bpm</span> - Tempo (umbral lactato): <span>FC 160-170 bpm</span>. Long runs SIEMPRE por FC, no por pace, sobre todo en terreno con cerros. Objetivo real: 80-85% del recorrido en zona 2-3.
     </div>
     <div class="alert-box">
-      Semana tipo: <span style="font-weight:600">Lunes</span> descanso total - <span style="font-weight:600">Martes</span> recovery run - <span style="font-weight:600">Miercoles</span> gym tren inferior (maquinas) + caminadora en recuperacion (max 35 min) - <span style="font-weight:600">Jueves</span> gym tren superior (maquinas) + caminadora en recuperacion (max 35 min) - <span style="font-weight:600">Viernes</span> la sesion de calidad de la semana (tempo o intervalos) - <span style="font-weight:600">Sabado</span> descanso activo + movilidad/core - <span style="font-weight:600">Domingo</span> long run. Se dejo un solo dia fuerte de calidad por semana (viernes) en vez de dos, para no acumular fatiga de piernas justo en la semana de mas volumen. Fondo pico (30-32 km, el ultimo de esa magnitud) queda el domingo 9 de agosto. Este domingo 26 de julio el fondo es de 24-25 km (ajustado). Este sabado 25 de julio es la Romeria a Cartago (~6.2 km caminando) y reemplaza unicamente el descanso activo de esa semana.
+      Semana tipo: <span style="font-weight:600">Lunes</span> descanso total - <span style="font-weight:600">Martes</span> recovery run - <span style="font-weight:600">Miercoles</span> gym tren inferior (maquinas) + caminadora en recuperacion (max 35 min) - <span style="font-weight:600">Jueves</span> gym tren superior (maquinas) + caminadora en recuperacion (max 35 min) - <span style="font-weight:600">Viernes</span> la sesion de calidad de la semana (tempo o intervalos) - <span style="font-weight:600">Sabado</span> descanso activo + movilidad/core - <span style="font-weight:600">Domingo</span> long run. Se dejo un solo dia fuerte de calidad por semana (viernes) en vez de dos, para no acumular fatiga de piernas justo en la semana de mas volumen. Fondo pico (30-32 km, el ultimo de esa magnitud) queda el domingo 9 de agosto. Este domingo 26 de julio el fondo es de 24-25 km (ajustado). La Romeria a Cartago (~6.2 km caminando) se movio al viernes 31 de julio y reemplaza la sesion de calidad de esa semana - el sabado 25 de julio vuelve a ser descanso activo normal.
     </div>
     <div class="tabs" id="phase-tabs">
       <div class="tab active" onclick="showPhase(0)">Construccion</div>
@@ -510,15 +510,7 @@ const PHASES = [
         {name:"Miercoles",absDay:2,type:"gym",title:"Gym tren inferior (maquinas) + caminadora",extra:[warmup(),ligasGym(),...gymLowerMaquinas('full'),coreGym('full'),treadmillRun(35,'Recuperacion, zona 1-2 muy suave'),cooldown()]},
         {name:"Jueves",absDay:3,type:"gym",title:"Gym tren superior (maquinas) + caminadora",extra:[warmup(),ligasGym(),...gymUpperMaquinas('full'),coreGym('full'),treadmillRun(35,'Recuperacion, zona 1-2 muy suave'),cooldown()]},
         {name:"Viernes",absDay:4,type:"run",title:"Tempo 30 min - calidad de la semana",extra:[warmup(),ligasPre(),tempo30(),cooldown()]},
-        {name:"Sabado",absDay:5,type:"event",title:"Romeria a Cartago - caminata",extra:[
-          blk('bl-event','Romeria - caminata ~6.2 km total') + items([
-            'Paseo Metropoli Cartago hacia la Basilica de los Angeles: 3.1 km',
-            'Regreso: 3 km',
-            'Ritmo de caminata, no es sesion de entrenamiento - dejar que sea el descanso activo de esta semana',
-            'Hidratacion normal, buen calzado',
-            'Reemplaza unicamente el descanso activo de este sabado - no afecta el long run del domingo'
-          ])
-        ]},
+        {name:"Sabado",absDay:5,type:"mov",title:"Descanso activo + movilidad/core",extra:sabadoActivo()},
         {name:"Domingo",absDay:6,type:"long",title:"Long run 24-25 km",extra:[
           warmup(),
           longRun('24-25 km',['Fueling: barritas/gomitas + electrolitos cada 40-45 min desde el inicio','Ojo con el pace en cerros - la FC manda, no el numero en la muneca']),
@@ -530,7 +522,15 @@ const PHASES = [
         {name:"Martes",absDay:8,type:"run",title:"Recovery run",extra:[warmup(),ligasPre(),recoveryRun(40,'5-6'),cooldown()]},
         {name:"Miercoles",absDay:9,type:"gym",title:"Gym tren inferior (maquinas) + caminadora",extra:[warmup(),ligasGym(),...gymLowerMaquinas('full'),coreGym('full'),treadmillRun(35,'Recuperacion, zona 1-2 muy suave'),cooldown()]},
         {name:"Jueves",absDay:10,type:"gym",title:"Gym tren superior (maquinas) + caminadora",extra:[warmup(),ligasGym(),...gymUpperMaquinas('full'),coreGym('full'),treadmillRun(35,'Recuperacion, zona 1-2 muy suave'),cooldown()]},
-        {name:"Viernes",absDay:11,type:"run",title:"Intervalos 5x4 min - calidad de la semana",extra:[warmup(),ligasPre(),intervalos5x4(),cooldown()]},
+        {name:"Viernes",absDay:11,type:"event",title:"Romeria a Cartago - caminata",extra:[
+          blk('bl-event','Romeria - caminata ~6.2 km total') + items([
+            'Paseo Metropoli Cartago hacia la Basilica de los Angeles: 3.1 km',
+            'Regreso: 3 km',
+            'Ritmo de caminata, no es sesion de entrenamiento - reemplaza la sesion de calidad de esta semana',
+            'Hidratacion normal, buen calzado',
+            'No afecta el long run del domingo'
+          ])
+        ]},
         {name:"Sabado",absDay:12,type:"mov",title:"Descanso activo + movilidad/core",extra:sabadoActivo()},
         {name:"Domingo",absDay:13,type:"long",title:"Long run 27-29 km",extra:[
           warmup(),
