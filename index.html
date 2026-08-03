@@ -134,6 +134,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ar
 .day-card { cursor: pointer; transition: box-shadow .15s, transform .1s; }
 .day-card:hover { box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
 .day-card:active { transform: scale(0.99); }
+.day-card.today-highlight { box-shadow: 0 0 0 2px var(--purple); }
 .day-hint { font-size: 10px; color: var(--text3); margin-top: 10px; text-align: right; }
 
 .exo-list li { cursor: pointer; }
@@ -858,10 +859,10 @@ function renderPhase() {
         <div class="week-body" id="${id}">
           <div class="struct-note">${STRUCT}</div>
           <div class="days">
-            ${(w.days||[]).map(d => {
+            ${(w.days||[]).map((d, di) => {
               const dateStr = getDate(d.absDay);
               return `
-              <div class="day-card ${d.type}" onclick="openDayModal(this)">
+              <div class="day-card ${d.type}" id="day-${activePhase}-${wi}-${di}" onclick="openDayModal(this)">
                 <div class="day-name">${d.name}</div>
                 <div class="day-date">${dateStr}</div>
                 <div class="day-title">${d.title}</div>
@@ -883,8 +884,43 @@ function toggleWeek(id) {
   c.classList.toggle('open', b.classList.contains('open'));
 }
 
+function findTodayLocation() {
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const start = new Date(2026, 6, 20);
+  const diffDays = Math.round((today - start) / 86400000);
+  for (let p = 0; p < PHASES.length; p++) {
+    const weeks = PHASES[p].weeks;
+    for (let w = 0; w < weeks.length; w++) {
+      const days = weeks[w].days || [];
+      for (let d = 0; d < days.length; d++) {
+        if (days[d].absDay === diffDays) return { p, w, d };
+      }
+    }
+  }
+  return null;
+}
+
+function autoOpenToday() {
+  const loc = findTodayLocation();
+  if (!loc) {
+    toggleWeek('w0-0');
+    return;
+  }
+  showPhase(loc.p);
+  setTimeout(() => {
+    toggleWeek(`w${loc.p}-${loc.w}`);
+    const dayEl = document.getElementById(`day-${loc.p}-${loc.w}-${loc.d}`);
+    if (dayEl) {
+      dayEl.classList.add('today-highlight');
+      dayEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      openDayModal(dayEl);
+    }
+  }, 60);
+}
+
 renderPhase();
-setTimeout(() => { toggleWeek('w0-0'); }, 50);
+autoOpenToday();
 </script>
 </body>
 </html>
